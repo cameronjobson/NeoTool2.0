@@ -30,27 +30,33 @@ function NeoTool() {
   };
 
   const formatDate = (date) => {
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-    });
+    // Ensure we're formatting the date as UTC to avoid timezone conversions
+    return new Date(date.getTime() + (date.getTimezoneOffset() * 60000))
+      .toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      });
   };
 
   const calculateTreatmentDate = (dateOfBirth, daysOffset) => {
-    const dob = new Date(dateOfBirth);
-    dob.setDate(dob.getDate() + daysOffset);
+    // Parse the date as UTC
+    const dob = new Date(new Date(dateOfBirth).toISOString());
+    // Set the UTC date plus the day offset
+    dob.setUTCDate(dob.getUTCDate() + daysOffset);
+    // Format the date as a string in the local timezone
     return formatDate(dob);
   };
+  
 
   //For treatment dates determined by gestagational age
   const traditionalTreatmentDate = (treatmentDescription, CGA) => {
     if (!dateOfBirth) return '';
     const dob = new Date(dateOfBirth);
     const treatmentDate = new Date(
-      dob.getTime() -
-        gestAgeTotalDays * 24 * 60 * 60 * 1000 +
-        CGA * 7 * 24 * 60 * 60 * 1000
+      dob.getTime() +
+      CGA * 7 * 24 * 60 * 60 * 1000 -
+      gestAgeTotalDays * 24 * 60 * 60 * 1000
     );
     return {
       description: `${treatmentDescription} ${formatDate(treatmentDate)}`,
