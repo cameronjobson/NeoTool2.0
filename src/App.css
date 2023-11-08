@@ -98,4 +98,20 @@ button:hover {
   button {
     width: 100%;
   }
+
+  
+}
+
+.past-date {
+  color: red;
+}
+
+.current-date {
+  color: green;
+}
+
+img {
+  padding-left: 10em;
+  max-width: 50%;
+  height: auto px;
 }
