@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import DOMPurify from 'dompurify';
 import './App.css';
 
 function NeoTool() {
@@ -67,37 +68,34 @@ function NeoTool() {
 
   //Calculate ROP Dates
   const calculateRopExamDate = () => {
-    if (gestAgeTotalDays >= 0 && gestAgeTotalDays < 161){
-      return traditionalTreatmentDate("ROP First Exam Due near week of:", 31)
-    } else if (gestAgeTotalDays >= 161 && gestAgeTotalDays < 168){
-      return traditionalTreatmentDate("ROP First Exam Due near week of:", 31)
-    } else if (gestAgeTotalDays >= 168 && gestAgeTotalDays < 175){
-      return traditionalTreatmentDate("ROP First Exam Due near week of:", 31)
-    } else if (gestAgeTotalDays >= 175 && gestAgeTotalDays < 182){
-      return traditionalTreatmentDate("ROP First Exam Due near week of:", 31)
-    } else if (gestAgeTotalDays >= 182 && gestAgeTotalDays < 189){
-      return traditionalTreatmentDate("ROP First Exam Due near week of:", 31)
-    } else if (gestAgeTotalDays >= 189 && gestAgeTotalDays < 196){
-      return traditionalTreatmentDate("ROP First Exam Due near week of:", 31)
-    } else if (gestAgeTotalDays >= 196 && gestAgeTotalDays < 203){
-      return traditionalTreatmentDate("ROP First Exam Due near week of:", 32)
-    } else if (gestAgeTotalDays >= 203 && gestAgeTotalDays < 210){
-      return traditionalTreatmentDate("ROP First Exam Due near week of:", 33)
-    } else if (gestAgeTotalDays >= 210 && gestAgeTotalDays < 217){
-      return traditionalTreatmentDate("ROP First Exam Due near week of:", 34)
-    } else if (gestAgeTotalDays >= 217 && gestAgeTotalDays < 224){
-      return traditionalTreatmentDate("ROP First Exam Due near week of:", 35)
-    } else if (gestAgeTotalDays >= 224 && gestAgeTotalDays < 231){
-      return traditionalTreatmentDate("ROP First Exam Due near week of:", 36)
-    } else if (gestAgeTotalDays >= 231 && gestAgeTotalDays < 238){
-      return traditionalTreatmentDate("ROP First Exam Due near week of:", 37)
-    } else if (gestAgeTotalDays >= 238 && gestAgeTotalDays < 245){
-      return traditionalTreatmentDate("ROP First Exam Due near week of:", 38)
-    } else if (gestAgeTotalDays >= 245 && gestAgeTotalDays < 252){
-      return traditionalTreatmentDate("ROP First Exam Due near week of:", 39)
-    } else {
-      return traditionalTreatmentDate("ROP First Exam Due near week of:", 40)
-  }}
+    if (gestAgeTotalDays < 0) {
+      // Handle negative gestAgeTotalDays, if needed
+      return; // or throw an error
+    }
+
+    let weekNumber = 31;
+    if (gestAgeTotalDays >= 196 && gestAgeTotalDays < 203) {
+      weekNumber = 32;
+    } else if (gestAgeTotalDays >= 203 && gestAgeTotalDays < 210) {
+      weekNumber = 33;
+    } else if (gestAgeTotalDays >= 210 && gestAgeTotalDays < 217) {
+      weekNumber = 34;
+    } else if (gestAgeTotalDays >= 217 && gestAgeTotalDays < 224) {
+      weekNumber = 35;
+    } else if (gestAgeTotalDays >= 224 && gestAgeTotalDays < 231) {
+      weekNumber = 36;
+    } else if (gestAgeTotalDays >= 231 && gestAgeTotalDays < 238) {
+      weekNumber = 37;
+    } else if (gestAgeTotalDays >= 238 && gestAgeTotalDays < 245) {
+      weekNumber = 38;
+    } else if (gestAgeTotalDays >= 245 && gestAgeTotalDays < 252) {
+      weekNumber = 39;
+    } else if (gestAgeTotalDays >= 252) {
+      weekNumber = 40;
+    }
+
+    return traditionalTreatmentDate("ROP First Exam Due near week of:", weekNumber);
+  }
 
   // For treatment dates determined by Days Of Life
   const simpleTreatment = (treatmentDescription, daysAdd) => {
@@ -119,7 +117,7 @@ function NeoTool() {
 
     if (weight > 0 && gestAgeTotalDays > 0) {
       if (weight <= 1500){
-        treatments.push(traditionalTreatmentDate('DEBM stop at 1500g and 35w', 35));
+        treatments.push(traditionalTreatmentDate('<b>DEBM</b> stop at 1500g and <br> 35w', 35));
       }
       treatments.push(simpleTreatment('MVI/Fe at full feeds and >/=14dol', 14));
       treatments.push(calculateRopExamDate())
@@ -190,15 +188,16 @@ function NeoTool() {
       </form>
 
       <div className="output-section">
-        {output.map((item, index) => {
-          const dateClass = getDateClass(item.date || '');
-          return (
-            <div key={index} className={dateClass}>
-              {item.description || item}
-            </div>
-          );
-        })}
+  {output.map((item, index) => {
+    const dateClass = getDateClass(item.date || '');
+    const sanitizedDescription = DOMPurify.sanitize(item.description || '');
+    return (
+      <div key={index} className={dateClass} dangerouslySetInnerHTML={{ __html: sanitizedDescription }}>
       </div>
+    );
+  })}
+</div>
+
     </div>
   );
 }
