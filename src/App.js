@@ -16,17 +16,22 @@ function NeoTool() {
 
   // Generate past dates in red, current dates in green
   const getDateClass = (date) => {
+    // Check if the date is a valid and non-empty string
+    if (!date || isNaN(Date.parse(date))) {
+      return 'invalid-date'; // Return a class for invalid or missing dates
+    }
+  
     const currentDate = new Date();
     currentDate.setHours(0, 0, 0, 0); // Normalize current date to start of day for comparison
     const comparisonDate = new Date(date);
     comparisonDate.setHours(0, 0, 0, 0); // Normalize the comparison date
-
+  
     if (comparisonDate < currentDate) {
       return 'past-date';
     } else if (comparisonDate.getTime() === currentDate.getTime()) {
       return 'current-date';
     } else {
-      return '';
+      return 'future-date'; // Added to handle future dates
     }
   };
 
@@ -106,21 +111,42 @@ function NeoTool() {
     };
   };
 
+  const plainText = (treatmentDescription) => {
+    return {
+      description: `${treatmentDescription}`,
+      date: NaN,
+    }
+  }
+
   //List of protocals for generating treatment list
   const treatmentList = () => {
     let treatments = [];
     const weight = birthWeight ? parseInt(birthWeight, 10) : 0;
     //Catch Invalid Inputs
-    if (weight <= 0) treatments.push('Enter a valid Weight.');
-    if (gestAgeTotalDays <= 0) treatments.push('Enter a valid Gestational Age.');
-    if (dateOfBirth === '') treatments.push('Enter a valid DOB');
+    if (weight <= 0) treatments.push(plainText('Enter a valid Weight.'));
+    if (gestAgeTotalDays <= 0) treatments.push(plainText('Enter a valid Gestational Age.'));
+    if (dateOfBirth === '') treatments.push(plainText('Enter a valid DOB'));
 
     if (weight > 0 && gestAgeTotalDays > 0) {
+
+      //Donor Breast Milk
       if (weight <= 1500){
-        treatments.push(traditionalTreatmentDate('<b>DEBM</b> stop at 1500g and <br> 35w', 35));
+        treatments.push(plainText('<b>Donor Breast Milk</b>'))
       }
+      //Multivitamin
       treatments.push(simpleTreatment('MVI/Fe at full feeds and >/=14dol', 14));
+
+      //ROP exam
       treatments.push(calculateRopExamDate())
+
+      //Head Ultrasound
+      if (gestAgeTotalDays <= 210){
+        treatments.push(plainText("<b>Head Ultrasound ▼</b>"))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First HUS date @ 7 days:", 7))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Second HUS date @ ≈ 1 month:", 30))
+        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Third HUS date @ 1 term or discharge:', 40))
+      }
+      
     }
 
     return treatments;

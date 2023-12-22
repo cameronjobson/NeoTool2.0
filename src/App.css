@@ -69,6 +69,7 @@ button:hover {
   margin-top: 20px;
 }
 
+/* This controls the blocks*/
 .output-section div {
   background-color: #f2f2f2; /* Light background to contrast with the text */
   padding: 10px;
