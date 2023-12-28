@@ -99,7 +99,7 @@ function NeoTool() {
       weekNumber = 40;
     }
 
-    return traditionalTreatmentDate("ROP First Exam Due near week of:", weekNumber);
+    return traditionalTreatmentDate("<b>ROP</b> First Exam Due near week of:", weekNumber);
   }
 
   // For treatment dates determined by Days Of Life
@@ -134,7 +134,7 @@ function NeoTool() {
         treatments.push(plainText('<b>Donor Breast Milk</b>'))
       }
       //Multivitamin
-      treatments.push(simpleTreatment('MVI/Fe at full feeds and >/=14dol', 14));
+      treatments.push(simpleTreatment('<b>MVI/Fe</b> at full feeds and >/=14dol', 14));
 
       //ROP exam
       treatments.push(calculateRopExamDate())
@@ -146,7 +146,32 @@ function NeoTool() {
         treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Second HUS date @ ≈ 1 month:", 30))
         treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Third HUS date @ 1 term or discharge:', 40))
       }
+
+      //Postnatal Steroids
+      if (gestAgeTotalDays <= 210){
+        treatments.push(plainText("<b>Postnatal Steroids BPD Calc▼</b>"))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First @ 14 days:", 14))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Second @ 21 days:", 21))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Second @ 28 days:", 28))
+      }
+
+      //Synagis
+      if (gestAgeTotalDays <= 202){
+        treatments.push(plainText("<b>Synagis</b>"))
+      }
       
+      //Hepatitis b vaccine
+      treatments.push(plainText("<b>Hepitatis B Vaccine</b>"))
+      if (weight >= 2000){
+        treatments.push(plainText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 dose within 24 hours of birth if medically stable"))
+      } else if (weight < 2000){
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 dose at chronological age 1 month or hospital discharge", 30))
+      }
+
+      //NIPPV
+      if (gestAgeTotalDays <= 216 && weight < 1500){
+        treatments.push(plainText("<b>NIPPV</b>"))
+      }
     }
 
     return treatments;
