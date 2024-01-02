@@ -57,7 +57,7 @@ function NeoTool() {
   
 
   //For treatment dates determined by gestagational age
-  const traditionalTreatmentDate = (treatmentDescription, CGA) => {
+  const traditionalTreatmentDate = (treatmentDescription, CGA, source) => {
     if (!dateOfBirth) return '';
     const dob = new Date(dateOfBirth);
     const treatmentDate = new Date(
@@ -68,6 +68,7 @@ function NeoTool() {
     return {
       description: `${treatmentDescription} ${formatDate(treatmentDate)}`,
       date: formatDate(treatmentDate),
+      source: source,
     };
   };
 
@@ -103,18 +104,20 @@ function NeoTool() {
   }
 
   // For treatment dates determined by Days Of Life
-  const simpleTreatment = (treatmentDescription, daysAdd) => {
+  const simpleTreatment = (treatmentDescription, daysAdd, source) => {
     if (!dateOfBirth) return '';
     return {
       description: `${treatmentDescription} ${calculateTreatmentDate(dateOfBirth, daysAdd)}`,
-      date: calculateTreatmentDate(dateOfBirth, daysAdd),
+      date: calculateTreatmentDate(dateOfBirth, daysAdd), 
+      source: source,
     };
   };
 
-  const plainText = (treatmentDescription) => {
+  const plainText = (treatmentDescription, source) => {
     return {
       description: `${treatmentDescription}`,
       date: NaN,
+      source: source,
     }
   }
 
@@ -131,7 +134,7 @@ function NeoTool() {
 
       //Donor Breast Milk
       if (weight <= 1500){
-        treatments.push(plainText('<b>Donor Breast Milk</b>'))
+        treatments.push(plainText('<b>Donor Breast Milk</b>', "https://publications.aap.org/pediatrics/article/139/1/e20163440/52000/Donor-Human-Milk-for-the-High-Risk-Infant"))
       }
       //Multivitamin
       treatments.push(simpleTreatment('<b>MVI/Fe</b> at full feeds and >/=14dol', 14));
@@ -141,15 +144,15 @@ function NeoTool() {
 
       //Head Ultrasound
       if (gestAgeTotalDays <= 210){
-        treatments.push(plainText("<b>Head Ultrasound ▼</b>"))
+        treatments.push(plainText("<b>Head Ultrasound ▼</b>", "https://publications.aap.org/pediatrics/article/146/5/e2020029082/75330/Routine-Neuroimaging-of-the-Preterm-Brain?autologincheck=redirected"))
         treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First HUS date @ 7 days:", 7))
-        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Second HUS date @ ≈ 1 month:", 30))
-        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Third HUS date @ 1 term or discharge:', 40))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Second HUS date @ ≈ 1 month:", 30,))
+        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Third HUS date @ 1 term or discharge:', 40,))
       }
 
       //Postnatal Steroids
       if (gestAgeTotalDays <= 210){
-        treatments.push(plainText("<b>Postnatal Steroids BPD Calc▼</b>"))
+        treatments.push(plainText("<b>Postnatal Steroids BPD Calc▼</b>", "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7578580/"))
         treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First @ 14 days:", 14))
         treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Second @ 21 days:", 21))
         treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Second @ 28 days:", 28))
@@ -157,11 +160,11 @@ function NeoTool() {
 
       //Synagis
       if (gestAgeTotalDays <= 202){
-        treatments.push(plainText("<b>Synagis</b>"))
+        treatments.push(plainText("<b>Synagis</b>", "https://publications.aap.org/pediatrics/article/134/2/415/33013/Updated-Guidance-for-Palivizumab-Prophylaxis-Among"))
       }
       
       //Hepatitis b vaccine
-      treatments.push(plainText("<b>Hepitatis B Vaccine</b>"))
+      treatments.push(plainText("<b>Hepitatis B Vaccine</b>","https://publications.aap.org/redbook/pages/Immunization-Schedules"))
       if (weight >= 2000){
         treatments.push(plainText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 dose within 24 hours of birth if medically stable"))
       } else if (weight < 2000){
@@ -170,7 +173,7 @@ function NeoTool() {
 
       //NIPPV
       if (gestAgeTotalDays <= 216 && weight < 1500){
-        treatments.push(plainText("<b>NIPPV</b>"))
+        treatments.push(plainText("<b>NIPPV</b>", "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9874940/"))
       }
     }
 
@@ -242,12 +245,18 @@ function NeoTool() {
   {output.map((item, index) => {
     const dateClass = getDateClass(item.date || '');
     const sanitizedDescription = DOMPurify.sanitize(item.description || '');
+
     return (
-      <div key={index} className={dateClass} dangerouslySetInnerHTML={{ __html: sanitizedDescription }}>
+      <div key={index} className={`${dateClass} item-container`}>
+        <div dangerouslySetInnerHTML={{ __html: sanitizedDescription }} className="item-description" />
+        {item.source && (
+          <a href={item.source} target="_blank" rel="noopener noreferrer" className="item-source">ⓘ</a>
+        )}
       </div>
     );
   })}
 </div>
+
 
     </div>
   );

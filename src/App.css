@@ -72,9 +72,9 @@ button:hover {
 /* This controls the blocks*/
 .output-section div {
   background-color: #f2f2f2; /* Light background to contrast with the text */
-  padding: 10px;
   margin-bottom: 5px;
   border-radius: 4px;
+  height: 10px; /* Fixed height; adjust as needed */
 }
 
 /* Media query for responsiveness */
@@ -115,4 +115,24 @@ img {
   padding-left: 10em;
   max-width: 50%;
   height: auto px;
+}
+
+.item-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f2f2f2; /* Light background to contrast with the text */
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+}
+
+.item-description {
+  /* Your existing styles for the description */
+}
+
+.item-source {
+  margin-left: auto;
+  color: #0079aa; /* Light blue color to match the logo */
+  text-decoration: none; /* Optional: Removes underline from links */
 }
