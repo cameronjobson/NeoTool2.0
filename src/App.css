@@ -69,13 +69,21 @@ button:hover {
   margin-top: 20px;
 }
 
-/* This controls the blocks*/
+/* This controls the blocks */
 .output-section div {
   background-color: #f2f2f2; /* Light background to contrast with the text */
   margin-bottom: 5px;
+  margin-top: 5px; /* Adjusts the top margin to move the blocks up */
+  margin-left: 7px;
   border-radius: 4px;
-  height: 10px; /* Fixed height; adjust as needed */
+  padding: 0px; /* Adds padding inside the bubbles */
+  box-sizing: border-box; /* Ensures padding is included in the width calculation */
+  word-wrap: break-word; /* Ensures long words do not overflow */
+  overflow-wrap: break-word; /* Allows words to break and wrap to the next line */
 }
+
+
+
 
 /* Media query for responsiveness */
 @media (max-width: 768px) {
@@ -98,6 +106,10 @@ button:hover {
 
   button {
     width: 100%;
+  }
+
+  .output-section div {
+    width: 97%;
   }
 
   
