@@ -16,49 +16,50 @@ function NeoTool() {
 
   // Generate past dates in red, current dates in green
   const getDateClass = (date) => {
-    // Check if the date is a valid and non-empty string
     if (!date || isNaN(Date.parse(date))) {
-      return 'invalid-date'; // Return a class for invalid or missing dates
+      return 'invalid-date';
     }
   
     const currentDate = new Date();
-    currentDate.setHours(0, 0, 0, 0); // Normalize current date to start of day for comparison
-    const comparisonDate = new Date(date);
-    comparisonDate.setHours(0, 0, 0, 0); // Normalize the comparison date
+    currentDate.setUTCHours(0, 0, 0, 0); // Set time to midnight UTC
   
-    if (comparisonDate < currentDate) {
-      return 'past-date';
-    } else if (comparisonDate.getTime() === currentDate.getTime()) {
+    const comparisonDate = new Date(date);
+    comparisonDate.setUTCHours(0, 0, 0, 0); // Set time to midnight UTC
+
+    console.log(comparisonDate)
+  
+    if (currentDate.toUTCString() === comparisonDate.toUTCString()) {
       return 'current-date';
+    } else if (comparisonDate < currentDate) {
+      return 'past-date';
     } else {
-      return 'future-date'; // Added to handle future dates
+      return 'future-date';
     }
   };
 
   const formatDate = (date) => {
-    // Ensure we're formatting the date as UTC to avoid timezone conversions
-    const formattedDate = new Date(date.getTime() + (date.getTimezoneOffset() * 60000))
-      .toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-      });
+    // Format the date as a local date string without timezone conversion
+    const formattedDate = date.toLocaleDateString('en-US', {
+      month: '2-digit',
+      day: '2-digit',
+      timeZone: 'UTC' // Use UTC to avoid timezone offset
+    });
   
-    // Wrap the formatted date in HTML <strong> tags to make it bold
-    return `<strong>${formattedDate}</strong>`;
+    // Get the appropriate class based on the date
+    const dateClass = getDateClass(date);
+  
+    // Wrap the formatted date in HTML <strong> tags and apply the class
+    return `<strong class="${dateClass}">${formattedDate}</strong>`;
   };
   
 
 
   const calculateTreatmentDate = (dateOfBirth, daysOffset) => {
-    // Parse the date as UTC
-    const dob = new Date(new Date(dateOfBirth).toISOString());
-    // Set the UTC date plus the day offset
+    const dob = new Date(dateOfBirth);
+    dob.setUTCHours(0, 0, 0, 0); // Set time to midnight UTC
     dob.setUTCDate(dob.getUTCDate() + daysOffset);
-    // Format the date as a string in the local timezone
     return formatDate(dob);
   };
-  
 
   //For treatment dates determined by gestagational age
   const traditionalTreatmentDate = (treatmentDescription, CGA, source) => {
@@ -72,6 +73,26 @@ function NeoTool() {
     return {
       description: `${treatmentDescription} ${formatDate(treatmentDate)}`,
       date: formatDate(treatmentDate),
+      source: source,
+    };
+  };
+
+  //For treatments with 2 dates
+  const twoDayInputTraditionalTreatmentDate = (treatmentDescription, CGA_days1, CGA_days2, source) => {
+    if (!dateOfBirth) return '';
+  
+    const dob = new Date(dateOfBirth);
+    const treatmentDate1 = new Date(
+      dob.getTime() + CGA_days1 * 24 * 60 * 60 * 1000 - (gestAgeTotalDays * 24 * 60 * 60 * 1000)
+    );
+
+    const treatmentDate2 = new Date(
+      dob.getTime() + CGA_days2 * 24 * 60 * 60 * 1000 - (gestAgeTotalDays * 24 * 60 * 60 * 1000)
+    );
+  
+    return {
+      description: `${treatmentDescription} ${formatDate(treatmentDate1)} - ${formatDate(treatmentDate2)}`,
+      date: formatDate(treatmentDate1),
       source: source,
     };
   };
@@ -140,6 +161,7 @@ function NeoTool() {
     };
   };
 
+// For protocals with no dates
   const plainText = (treatmentDescription, source) => {
     return {
       description: `${treatmentDescription}`,
@@ -188,6 +210,9 @@ function NeoTool() {
       }
 
       //Trial of cpap *NEEDS WORK*
+      if (gestAgeTotalDays <= 230){
+        treatments.push(twoDayInputTraditionalTreatmentDate("<b>Trial off CPAP</b> @33w-34w", 231, 238))
+      }
 
       //Oxygen Challenge Test
       if (gestAgeTotalDays < 223){
@@ -202,23 +227,23 @@ function NeoTool() {
         treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;28 days:", 28))
       }
 
-      //Caffeine *NEEDS WORK*
+      //Caffeine
       if(gestAgeTotalDays <= 216 || weight < 1500){
         treatments.push(plainText("<b>Caffeine</b>"))
-        //First Protocal
+        //1st & 2nd Protocal
         if(gestAgeTotalDays >= 154 && gestAgeTotalDays <= 174){
-          treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10mg/kg/d on admit increase to 20mg/kg/d dol 8 OR 24h prior to extubation if <8d", 8))
+          treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10mg/k/d on admit then 20mg/kg/d dol8 OR 24h before extubate if <8d", 8))
+          treatments.push(twoDayInputTraditionalTreatmentDate("Stop @ 34-37w if off PPV & 5d apnea free (off PPV: off CPAP & on <4lpm HFNC)", 238, 259))
         }
-        //INPUT 2ND CAFFEINE PROTOCAL
 
-        //Third Protocal
+        //3rd Protocal
         if((gestAgeTotalDays >= 175 && gestAgeTotalDays <= 216) || (gestAgeTotalDays >= 175 && weight < 1500)){
         treatments.push(plainText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20mg/kg/d on admit"))
         }
 
         //4th Protocal
         if((gestAgeTotalDays >= 175 && gestAgeTotalDays <= 216) || (gestAgeTotalDays >= 175 && weight < 1500)){
-          treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stop at 34w if off PPV & 5d apnea free (off PPV: off CPAP & on <4lpm HFNC)', 34,))
+          treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DC @ 34w off PPV (off CPAP & on <4l) & 5d no apnea', 34,))
         }
 
         //5th Protocal
@@ -243,7 +268,7 @@ function NeoTool() {
 
       //ECHO
       if (gestAgeTotalDays <= 224){
-        treatments.push(plainText("ECHO for PAH"))
+        treatments.push(plainText("<b>ECHO</b> for PAH"))
       }
       if (gestAgeTotalDays <= 195){
         treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@32w if remains on ventilator', 32,))
@@ -284,7 +309,7 @@ function NeoTool() {
       //Fluconazole Prophylaxis
       if (gestAgeTotalDays <= 174 && weight < 750){
         treatments.push(plainText("<b>Fluconazole Prophylaxis:</b>"))
-        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3mg/kg/dose every 72h until CVL stopped or max of 6w", 42,))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3mg/kg q72h until DC CVL or max 6w", 42,))
       }
 
       //Vit K
