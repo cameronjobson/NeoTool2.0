@@ -189,7 +189,7 @@ function NeoTool() {
         treatments.push(plainText('<b>DBM</b> stop at 1500g'))
       }
       if (weight >= 1500 && gestAgeTotalDays < 245){
-        treatments.push(traditionalTreatmentDate('<b>DBM</b> stop at 1500g and 35w', 35))
+        treatments.push(traditionalTreatmentDate('<b>DBM</b> stop at 35w', 35))
       }
 
       //Prolacta
@@ -233,7 +233,7 @@ function NeoTool() {
         //1st & 2nd Protocal
         if(gestAgeTotalDays >= 154 && gestAgeTotalDays <= 174){
           treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10mg/k/d on admit then 20mg/kg/d dol8 OR 24h before extubate if <8d", 8))
-          treatments.push(twoDayInputTraditionalTreatmentDate("Stop @ 34-37w if off PPV & 5d apnea free (off PPV: off CPAP & on <4lpm HFNC)", 238, 259))
+          treatments.push(twoDayInputTraditionalTreatmentDate("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stop @ 34-37w if off PPV & 5d apnea free (off PPV: off CPAP & on <4lpm HFNC)", 238, 259))
         }
 
         //3rd Protocal
