@@ -19,7 +19,7 @@ function NeoTool() {
     if (!date || isNaN(Date.parse(date))) {
       return 'invalid-date';
     }
-  
+
     const currentDate = new Date();
     currentDate.setUTCHours(0, 0, 0, 0); // Set time to midnight UTC
   
@@ -143,10 +143,10 @@ function NeoTool() {
       weekNumber = 40;
     }
     if (R === false){
-      return traditionalTreatmentDate("<b>ROP</b> First Exam due near week of", weekNumber);
+      return traditionalTreatmentDate("<b>ROP First Exam</b> due near", weekNumber);
     }
     else {
-      return traditionalTreatmentDate("<b>ROP</b> First Exam (if risk factors) due near week of", weekNumber);
+      return traditionalTreatmentDate("<b>ROP exam if unstable</b> First Exam due near", weekNumber);
     }
 
   }
@@ -202,7 +202,7 @@ function NeoTool() {
         treatments.push(traditionalTreatmentDate('<b>HMF/PTF</b> until 3.5kg then D/C feeds ', 35))
       }
       //Multivitamin
-      treatments.push(simpleTreatment('<b>MVI/Fe</b> at full feeds and >/=14dol', 14));
+      treatments.push(simpleTreatment('<b>VIT(s)/Fe</b> at full feeds and >/=14dol', 14));
 
       //NIPPV
       if (gestAgeTotalDays <= 209){
@@ -241,18 +241,22 @@ function NeoTool() {
         treatments.push(plainText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20mg/kg/d on admit"))
         }
 
+        //4th Protocal
         if((gestAgeTotalDays >= 175 && gestAgeTotalDays <= 216) || ((gestAgeTotalDays >= 217 && gestAgeTotalDays <= 237) && weight >= 1499)){
         treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stop at 34w if off PPV and 5d apnea free off PPV: off CPAP and on <4lpm HFNC)', 34,))
         }
 
+        //5th Protocal
         if (gestAgeTotalDays >= 238 && weight <= 1499){
         treatments.push(plainText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stop if off PPV and 5d apnea free (off PPV: off CPAP and on <4lpm HFNC)"))
         }
 
+        //6th Protocal
         if ((gestAgeTotalDays <= 231 && weight < 1500) || (gestAgeTotalDays <= 216 && weight >= 1500)){
         treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stop weight adjustments at 34w', 34,))
         }
 
+        //7th Protocal
         if (gestAgeTotalDays <= 216 || weight < 1500){
         treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ok to stop at 43w if remains on PPV', 43,))
         }
@@ -411,8 +415,6 @@ function NeoTool() {
     );
   })}
 </div>
-
-
     </div>
   );
 }
