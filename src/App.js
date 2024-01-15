@@ -347,7 +347,7 @@ function NeoTool() {
       <form onSubmit={handleSubmit}>
       <img src="/pediatrixlogo.jpg" alt="Baylor University Medical Center" />
         <h1>NICU Patient Treatment Generator</h1>
-        <h2>(PDX Fort Worth Protocal)</h2>
+        <h2> </h2>
         <div className="input-group">
           <label htmlFor="gestational-age-weeks">Birth Gestational Age:</label>
           <input
