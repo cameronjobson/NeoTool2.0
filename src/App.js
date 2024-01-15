@@ -141,7 +141,7 @@ function NeoTool() {
       weekNumber = 40;
     }
     if (R === false){
-      return traditionalTreatmentDate("<b>ROP First Exam</b> due near", weekNumber);
+      return traditionalTreatmentDate("<b>ROP</b> First Exam due near", weekNumber);
     }
     else {
       return traditionalTreatmentDate("<b>ROP exam if unstable</b> First Exam due near", weekNumber);
@@ -200,16 +200,16 @@ function NeoTool() {
         treatments.push(traditionalTreatmentDate('<b>HMF/PTF</b> until 3.5kg then D/C feeds ', 35))
       }
       //Multivitamin
-      treatments.push(simpleTreatment('<b>VIT(s)/Fe</b> at full feeds and >/=14dol', 14));
+      treatments.push(simpleTreatment('<b>Vit(s)/Fe</b> at full feeds and >/=14dol', 14));
 
       //NIPPV
       if (gestAgeTotalDays <= 209){
         treatments.push(plainText("<b>NIPPV</b> on admission"))
       }
 
-      //Trial of cpap *NEEDS WORK*
+      //Trial of cpap
       if (gestAgeTotalDays <= 230){
-        treatments.push(twoDayInputTraditionalTreatmentDate("<b>Trial off CPAP</b> @33w-34w", 231, 238))
+        treatments.push(twoDayInputTraditionalTreatmentDate("Consider <b>Trial off CPAP</b> @33w-34w", 231, 238))
       }
 
       //Oxygen Challenge Test
