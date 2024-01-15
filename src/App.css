@@ -88,36 +88,42 @@ button:hover {
 /* Media query for responsiveness */
 @media (max-width: 600px) {
   .NeoTool {
-    padding: 10px;
+    padding: 15px; /* Increased padding for better spacing */
   }
 
   .input-group {
     flex-direction: column;
-    align-items: flex-start;
-    width: 90%;
+    align-items: center; /* Align items to the center */
+    width: 70%; /* Full width for better use of space */
   }
 
   .input-group label {
-    margin: 5px 0;
-    width: 90%;
+    margin-bottom: 10px; /* Increased bottom margin for clearer separation */
+    width: 80%; /* Smaller width for labels */
+    font-size: 16px; /* Larger font size for readability */
+    text-align: center; /* Center align the text */
   }
 
   .input-group input {
-    width: 90%;
-    margin: 5px 0;
+    width: 80%; /* Smaller width for inputs */
+    margin: 5px auto; /* Auto margin for horizontal centering */
+    padding: 8px; /* Added padding for better touch interaction */
+    font-size: 16px; /* Match font size with label for consistency */
   }
 
   button {
-    width: 100%;
+    width: 80%; /* Smaller width to match input fields */
+    margin: 10px auto; /* Center the button */
+    padding: 10px; /* Increased padding for a better touch area */
+    font-size: 18px; /* Larger font size for visibility */
+    color: white; /* Text color for contrast */
+    border: none; /* Removing border for a cleaner look */
+    border-radius: 5px; /* Rounded corners for a modern look */
+    display: block; /* Block display to enable margin auto */
   }
 
-  .output-section div {
-    width: 97%;
-  }
 
-  
 }
-
 
 .past-date {
   color: red;
