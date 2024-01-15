@@ -86,7 +86,7 @@ button:hover {
 
 
 /* Media query for responsiveness */
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .NeoTool {
     padding: 10px;
   }
@@ -94,13 +94,16 @@ button:hover {
   .input-group {
     flex-direction: column;
     align-items: flex-start;
+    width: 90%;
   }
 
   .input-group label {
     margin: 5px 0;
+    width: 90%;
   }
 
   .input-group input {
+    width: 90%;
     margin: 5px 0;
   }
 

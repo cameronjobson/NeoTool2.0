@@ -25,8 +25,6 @@ function NeoTool() {
   
     const comparisonDate = new Date(date);
     comparisonDate.setUTCHours(0, 0, 0, 0); // Set time to midnight UTC
-
-    console.log(comparisonDate)
   
     if (currentDate.toUTCString() === comparisonDate.toUTCString()) {
       return 'current-date';
@@ -347,9 +345,9 @@ function NeoTool() {
   return (
     <div className="NeoTool">
       <form onSubmit={handleSubmit}>
-      <img src="/BSW_Baylor_University_Medical_Center_C_4C_White_Background__20210512_16553398_.jpg" alt="Baylor University Medical Center" />
+      <img src="/pediatrixlogo.jpg" alt="Baylor University Medical Center" />
         <h1>NICU Patient Treatment Generator</h1>
-        <h2>(Baylor University Medical Center)</h2>
+        <h2>(PDX Fort Worth Protocal)</h2>
         <div className="input-group">
           <label htmlFor="gestational-age-weeks">Birth Gestational Age:</label>
           <input
