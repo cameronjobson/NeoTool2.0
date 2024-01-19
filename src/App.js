@@ -327,10 +327,10 @@ function NeoTool() {
         if (gestAgeTotalDays <= 174){
           treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;60 days", 60,))
         }
-
+      }
       //cCMV screening
       treatments.push(simpleTreatment("<b>cCMV screening</b> last day 3w old (if no hearing screen done)", 21,))
-      }
+      
 
     }
 
