@@ -191,8 +191,12 @@ function NeoTool() {
       }
 
       //Prolacta
-      if (weight <= 1250){
+      if (weight <= 1250 && gestAgeTotalDays < 230){
         treatments.push(traditionalTreatmentDate('<b>Prolacta</b> stop at 1500g and 33w', 33))
+      }
+
+      if (weight <= 1250 && gestAgeTotalDays >= 231){
+        treatments.push(plainText('<b>Prolacta</b> stop at 1500g'))
       }
 
       //HMF/PTF
@@ -300,7 +304,7 @@ function NeoTool() {
       if (gestAgeTotalDays <= 202){
         treatments.push(plainText("<b>Nest</b> F/U Tier 1b"))
       }
-      if ((gestAgeTotalDays >= 203 && gestAgeTotalDays <= 223) && (weight <= 1500)){
+      if ((gestAgeTotalDays >= 203 && gestAgeTotalDays <= 223) || (weight <= 1500)){
         treatments.push(plainText("<b>Nest</b> F/U Tier 2"))
       }
 
@@ -347,7 +351,7 @@ function NeoTool() {
       <form onSubmit={handleSubmit}>
       <img src="/pediatrixlogo.jpg" alt="Baylor University Medical Center" />
         <h1>NICU Patient Treatment Generator</h1>
-        <h2> </h2>
+        <h2> Not Affiliated with Pediatrix please rep</h2>
         <div className="input-group">
           <label htmlFor="gestational-age-weeks">Birth Gestational Age:</label>
           <input
