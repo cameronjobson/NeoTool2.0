@@ -333,7 +333,7 @@ function NeoTool() {
         }
       }
       //cCMV screening
-      treatments.push(simpleTreatment("<b>cCMV screening</b> last day 3w old (if no hearing screen done)", 21,))
+      treatments.push(simpleTreatment("<b>cCMV screening</b> @ 2w of age unless hearing screen pass both ears simultaneously", 14,))
       
 
     }
@@ -349,9 +349,9 @@ function NeoTool() {
   return (
     <div className="NeoTool">
       <form onSubmit={handleSubmit}>
-      <img src="/pediatrixlogo.jpg" alt="Baylor University Medical Center" />
+        <img src="/pediatrixlogo.jpg" alt="Baylor University Medical Center" />
         <h1>NICU Patient Treatment Generator</h1>
-        <h2> Not Affiliated with Pediatrix please rep</h2>
+        <h2>(Not Affiliated with Pediatrix)</h2>
         <div className="input-group">
           <label htmlFor="gestational-age-weeks">Birth Gestational Age:</label>
           <input
@@ -362,9 +362,7 @@ function NeoTool() {
             onChange={(e) => setGestAgeWeeks(e.target.value)}
             placeholder="Weeks"
           />
-          <label className="label-inline" htmlFor="gestational-age-days">
-            w
-          </label>
+          <label className="label-inline" htmlFor="gestational-age-days">w</label>
           <input
             className="days-input"
             id="gestational-age-days"
@@ -375,7 +373,7 @@ function NeoTool() {
           />
           <label className="label-inline">d</label>
         </div>
-
+  
         <div className="input-group">
           <label htmlFor="dob">DOB:</label>
           <input
@@ -385,7 +383,7 @@ function NeoTool() {
             onChange={(e) => setDateOfBirth(e.target.value)}
           />
         </div>
-
+  
         <div className="input-group">
           <label htmlFor="birth-weight">Birth weight:</label>
           <input
@@ -398,27 +396,33 @@ function NeoTool() {
           />
           <label className="label-inline">g</label>
         </div>
-
+  
         <button type="submit">Generate Treatment Dates</button>
       </form>
-
+  
       <div className="output-section">
-  {output.map((item, index) => {
-    const dateClass = getDateClass(item.date || '');
-    const sanitizedDescription = DOMPurify.sanitize(item.description || '');
-
-    return (
-      <div key={index} className={`${dateClass} item-container`}>
-        <div dangerouslySetInnerHTML={{ __html: sanitizedDescription }} className="item-description" />
-        {item.source && (
-          <a href={item.source} target="_blank" rel="noopener noreferrer" className="item-source">ⓘ</a>
-        )}
+        {output.map((item, index) => {
+          const dateClass = getDateClass(item.date || '');
+          const sanitizedDescription = DOMPurify.sanitize(item.description || '');
+  
+          return (
+            <div key={index} className={`${dateClass} item-container`}>
+              <div dangerouslySetInnerHTML={{ __html: sanitizedDescription }} className="item-description" />
+              {item.source && (
+                <a href={item.source} target="_blank" rel="noopener noreferrer" className="item-source">ⓘ</a>
+              )}
+            </div>
+          );
+        })}
       </div>
-    );
-  })}
-</div>
+  
+      {/* Footer Section */}
+      <footer className="NeoTool-footer">
+        <p>Made by Cameron Jobson</p>
+        <p>Contact info: <br/>Email: <a href="mailto:cameronajobson@gmail.com">cameronajobson@gmail.com</a> <br/>Phone: <a href="tel:+18173198996">817-319-8996</a></p>
+      </footer>
     </div>
   );
 }
-
-export default NeoTool;
+  export default NeoTool;
+  

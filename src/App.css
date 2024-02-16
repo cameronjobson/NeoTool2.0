@@ -158,3 +158,17 @@ img {
   color: #0079aa; /* Light blue color to match the logo */
   text-decoration: none; /* Optional: Removes underline from links */
 }
+
+.NeoTool-footer {
+  background-color: #f2f2f2; /* Light grey background */
+  color: #333; /* Dark text for contrast */
+  text-align: center;
+  padding: 10px 20px; /* Reduced padding for a smaller footer */
+  margin-top: 20px;
+  border-top: 1px solid #ddd; /* Light grey border for separation */
+  border-radius: 15px; /* Rounded corners */
+  font-size: 0.8rem; /* Smaller font size */
+  width: auto; /* Adjust width as needed, or use 'auto' for natural width */
+  margin-left: auto; /* Center the footer if width is less than 100% */
+  margin-right: auto; /* Center the footer if width is less than 100% */
+}
