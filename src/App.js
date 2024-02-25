@@ -304,7 +304,7 @@ function NeoTool() {
       if (gestAgeTotalDays <= 202){
         treatments.push(plainText("<b>Nest</b> F/U Tier 1b"))
       }
-      if ((gestAgeTotalDays >= 203 && gestAgeTotalDays <= 223) || (weight <= 1500)){
+      if ((gestAgeTotalDays >= 203 && gestAgeTotalDays <= 223) || (gestAgeTotalDays >= 224 && weight <= 1500)){
         treatments.push(plainText("<b>Nest</b> F/U Tier 2"))
       }
 
