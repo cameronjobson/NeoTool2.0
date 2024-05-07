@@ -63,6 +63,26 @@ button:hover {
   background-color: #0054a4; /* Dark blue color to match the logo */
 }
 
+/* Button container to organize button layout */
+.button-container {
+  display: flex;
+  justify-content: space-between; /* Aligns buttons to each end */
+  align-items: center; /* Centers buttons vertically */
+}
+
+.toggle-sort-button {
+  padding: 5px 10px; /* Smaller padding */
+  font-size: 0.8rem; /* Smaller font size */
+  margin-right: 10px; /* Provides spacing between buttons */
+}
+
+.generate-button {
+  /* If needed, add specific styles for the generate button here */
+}
+
+
+
+
 /* Output section styling */
 .output-section h3 {
   color: #0054a4; /* Dark blue color from the logo */
@@ -121,6 +141,19 @@ button:hover {
     border-radius: 5px; /* Rounded corners for a modern look */
     display: block; /* Block display to enable margin auto */
   }
+
+
+    .button-container {
+      flex-direction: row; /* Keeps buttons side by side on small screens */
+      justify-content: space-between;
+    }
+  
+    .toggle-sort-button, .generate-button {
+      width: 45%; /* Adjusts width to fit smaller screens */
+      margin: 5px; /* Smaller margin for compact layout */
+    }
+  
+  
 
 
 }
