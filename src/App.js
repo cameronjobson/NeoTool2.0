@@ -8,7 +8,7 @@ function NeoTool() {
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [birthWeight, setBirthWeight] = useState('');
   const [output, setOutput] = useState([]);
-  const [isSorted, setIsSorted] = useState(false);
+  const [isSorted, setIsSorted] = useState(true);
 
   // Convert specfic inputs from strings to integers
   const gestAgeTotalDays =
@@ -220,7 +220,7 @@ function NeoTool() {
 
       //Trial of cpap
       if (gestAgeTotalDays <= 230){
-        treatments.push(twoDayInputTraditionalTreatmentDate("Consider <b>Trial off CPAP</b> @33w-34w", 231, 238))
+        treatments.push(twoDayInputTraditionalTreatmentDate("Consider <b>Trial off CPAP</b> @32w-34w", 224, 238))
       }
 
       //Oxygen Challenge Test
@@ -273,7 +273,7 @@ function NeoTool() {
 
       //Synagis
       if (gestAgeTotalDays <= 202){
-        treatments.push(plainText("<b>Synagis</b> (if Beyfortus not available)", false))
+        treatments.push(plainText("<b>RSV Prophylaxis</b> before discharge if in RSV season", false))
       }
 
       if (gestAgeTotalDays >= 203 && gestAgeTotalDays <= 223){
@@ -285,18 +285,18 @@ function NeoTool() {
         treatments.push(plainText("<b>ECHO</b> for PAH", true))
       }
       if (gestAgeTotalDays <= 195){
-        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@32w if remains on ventilator', 32, '<b>ECHO</b> for PAH @32w if remains on ventilator'))
+        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@32w if remains on ventilator around', 32, '<b>ECHO</b> for PAH around @32w if remains on ventilator'))
       }
       if (gestAgeTotalDays <= 224){
-        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@36w if remains on resp support', 36, '<b>ECHO</b> @36w if remains on resp support'))
+        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@36w if remains on resp support around', 36, '<b>ECHO</b> around @36w if remains on resp support'))
       }
 
       //Head Ultrasound
       if (gestAgeTotalDays <= 216){
         treatments.push(plainText("<b>HUS</b>", true))
-        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1wk HUS (7d)", 7, "<b>HUS</b> 1wk HUS (7d)"))
-        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1mo HUS (30d)", 30, "<b>HUS</b> 1mo HUS (30d)"))
-        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Term/DC HUS', 40, '<b>HUS</b> Term/DC HUS'))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1wk HUS (7d) due near", 7, "<b>HUS</b> due near 1wk HUS (7d)"))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1mo HUS (30d) due near", 30, "<b>HUS</b> due near 1mo HUS (30d)"))
+        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;due near Term/DC HUS due near', 40, '<b>HUS</b> due near Term/DC HUS'))
       }
 
       //ROP exam
@@ -333,10 +333,10 @@ function NeoTool() {
 
       //TSH and Free T4:
       if (gestAgeTotalDays <= 216 || weight <= 1500){
-        treatments.push(plainText("<b>TSH and Free T4:</b>", true))
-        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30 days", 30, "<b>TSH and Free T4:</b> 30 days"))
+        treatments.push(plainText("<b>TSH and Free T4</b>", true))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30 days due near", 30, "<b>TSH and Free T4:</b> due near 30 days"))
         if (gestAgeTotalDays <= 174){
-          treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;60 days", 60, "<b>TSH and Free T4:</b> 60 days"))
+          treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;60 days due near", 60, "<b>TSH and Free T4:</b> due near 60 days"))
         }
       }
       //cCMV screening
