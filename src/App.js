@@ -214,8 +214,11 @@ function NeoTool() {
       treatments.push(simpleTreatment('<b>Vit(s)/Fe</b> at full feeds and >/=14dol', 14));
 
       //NIPPV
-      if (gestAgeTotalDays <= 209){
-        treatments.push(plainText("<b>NIPPV</b> on admission", false))
+      if (gestAgeTotalDays <= 174){
+        treatments.push(simpleTreatment('<b>JET</b> ventilator preferred mode', 0));
+      }
+      if (gestAgeTotalDays >= 175 && gestAgeTotalDays <= 209){
+        treatments.push(simpleTreatment('<b>NIPPV</b> preferred if not on vent on admission', 0));
       }
 
       //Trial of cpap
@@ -294,17 +297,17 @@ function NeoTool() {
       //Head Ultrasound
       if (gestAgeTotalDays <= 216){
         treatments.push(plainText("<b>HUS</b>", true))
-        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1wk HUS (7d) due near", 7, "<b>HUS</b> due near 1wk HUS (7d)"))
-        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1mo HUS (30d) due near", 30, "<b>HUS</b> due near 1mo HUS (30d)"))
-        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;due near Term/DC HUS due near', 40, '<b>HUS</b> due near Term/DC HUS'))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1wk HUS (7d) due near", 7, "<b>HUS</b> 1wk HUS (7d) (on a convenient weekday)"))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1mo HUS (30d) due near", 30, "<b>HUS</b> 1mo HUS (30d) (on a convenient weekday)"))
+        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Term/DC HUS due near', 40, '<b>HUS</b> Term/DC HUS (on a convenient weekday)'))
       }
 
       //ROP exam
       if (weight <= 1500 || gestAgeTotalDays <= 216){
         treatments.push(calculateRopExamDate(false))
       }
-      if ((gestAgeTotalDays >= 217 && gestAgeTotalDays <= 230) && (weight >= 1501 && weight <= 2000)){
-        treatments.push(calculateRopExamDate(true))
+      if ((gestAgeTotalDays >= 217) && (weight >= 1501 && weight <= 2000)){
+        treatments.push(simpleTreatment("<b>ROP First Exam</b> (if risk factors) due near week of", 28))
       }
 
       //Nest
@@ -334,9 +337,9 @@ function NeoTool() {
       //TSH and Free T4:
       if (gestAgeTotalDays <= 216 || weight <= 1500){
         treatments.push(plainText("<b>TSH and Free T4</b>", true))
-        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30 days due near", 30, "<b>TSH and Free T4:</b> due near 30 days"))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30 days due near", 30, "<b>TSH and Free T4:</b> 30 days (on a convenient weekday)"))
         if (gestAgeTotalDays <= 174){
-          treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;60 days due near", 60, "<b>TSH and Free T4:</b> due near 60 days"))
+          treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;60 days due near", 60, "<b>TSH and Free T4:</b> 60 days (on a convenient weekday)"))
         }
       }
       //cCMV screening
