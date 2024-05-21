@@ -187,6 +187,12 @@ function NeoTool() {
     if (weight > 0 && gestAgeTotalDays > 0) {
 
       //Donor Breast Milk
+      if (weight <= 1250){
+        treatments.push(simpleTreatment("Qualifies for <b>DEBM and Prolacta</b>", 0))
+      }
+      if (weight >= 1251 && weight <= 2200){
+        treatments.push(simpleTreatment("Qualifies for <b>DEBM and HMF</b>", 0))
+      }
       if (weight < 1500 && gestAgeTotalDays < 245){
         treatments.push(traditionalTreatmentDate('<b>DBM</b> stop at 1500g and 35w', 35))
       }
@@ -222,8 +228,8 @@ function NeoTool() {
       }
 
       //Trial of cpap
-      if (gestAgeTotalDays <= 230){
-        treatments.push(twoDayInputTraditionalTreatmentDate("Consider <b>Trial off CPAP</b> @32w-34w", 224, 238))
+      if (gestAgeTotalDays <= 223){
+        treatments.push(twoDayInputTraditionalTreatmentDate("<b>CPAP preferred mode of resp support up to</b> 32w-34w", 224, 238))
       }
 
       //Oxygen Challenge Test
@@ -235,8 +241,8 @@ function NeoTool() {
       //Postnatal Steroids
       if (gestAgeTotalDays <= 209){
         treatments.push(plainText("<b>PNS</b>  mod/sev BPD risk>60% at 14, 28d if on vent", true))
-        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;14 days:", 14, "<b>PNS</b> mod/sev BPD risk>60% at 14 if on vent"))
-        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;28 days:", 28, "<b>PNS</b> mod/sev BPD risk>60% at 28 if on vent"))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;14 dol:", 14, "<b>PNS</b> mod/sev BPD risk>60% at 14 dol if on vent"))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;28 dol:", 28, "<b>PNS</b> mod/sev BPD risk>60% at 28 dol if on vent"))
       }
 
       //Caffeine
@@ -307,25 +313,28 @@ function NeoTool() {
         treatments.push(calculateRopExamDate(false))
       }
       if ((gestAgeTotalDays >= 217) && (weight >= 1501 && weight <= 2000)){
-        treatments.push(simpleTreatment("<b>ROP First Exam</b> (if risk factors) due near week of", 28))
+        treatments.push(simpleTreatment("<b>ROP First Exam</b> (if risk factors) due near this week", 28))
       }
 
       //Nest
       if (gestAgeTotalDays <= 202){
-        treatments.push(plainText("<b>Nest</b> F/U Tier 1b", false))
+        treatments.push(plainText("<b>Nest</b> F/U Tier 1b (or higher tier if meets criteria at discharge)", false))
       }
       if ((gestAgeTotalDays >= 203 && gestAgeTotalDays <= 223) || (gestAgeTotalDays >= 224 && weight <= 1500)){
-        treatments.push(plainText("<b>Nest</b> F/U Tier 2", false))
+        treatments.push(plainText("<b>Nest</b> F/U Tier 2 (or higher tier if meets criteria at discharge)", false))
       }
 
       //Hepatitis b vaccine
       if (weight <= 1999){
         treatments.push(simpleTreatment("<b>Hep B Vaccine</b> at 30dol", 30,))
+      } else {
+        treatments.push(simpleTreatment("<b>Hep B Vaccine</b> at 30dol, defer to 60dol if infant too small for vaccination", 30,))
       }
 
       //Fluconazole Prophylaxis
-      if (gestAgeTotalDays <= 174 && weight < 750){
+      if (gestAgeTotalDays <= 174 || weight <= 749){
         treatments.push(plainText("<b>Fluconazole Prophylaxis:</b>", true))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meets criteria", 0, "Meets criteria"))
         treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3mg/kg q72h until DC CVL or max 6w", 42, "<b>Fluconazole Prophylaxis:</b> 3mg/kg q72h until DC CVL or max 6w"))
       }
 
@@ -336,14 +345,15 @@ function NeoTool() {
 
       //TSH and Free T4:
       if (gestAgeTotalDays <= 216 || weight <= 1500){
-        treatments.push(plainText("<b>TSH and Free T4</b>", true))
-        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30 days due near", 30, "<b>TSH and Free T4:</b> 30 days (on a convenient weekday)"))
+        treatments.push(plainText("<b>TSH and Free T4 near this date with Tuesday nutrition labs:</b>", true))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30 days due near", 30, "<b>TSH and Free T4 near this date with Tuesday nutrition labs:</b> 30 days (on a convenient weekday)"))
         if (gestAgeTotalDays <= 174){
-          treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;60 days due near", 60, "<b>TSH and Free T4:</b> 60 days (on a convenient weekday)"))
+          treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;60 days due near", 60, "<b>TSH and Free T4 near this date with Tuesday nutrition labs:</b> 60 days (on a convenient weekday)"))
         }
       }
       //cCMV screening
       treatments.push(simpleTreatment("<b>cCMV screening</b> @ 2w of age unless hearing screen pass both ears simultaneously", 14,))
+      treatments.push(plainText("<b>Audiology Referral</b> if NICU stay >5 days by 9months of age"))
     }
 
     return isSorted ? sortAndFilterTreatments(treatments) : treatments;
