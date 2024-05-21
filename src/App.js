@@ -338,7 +338,7 @@ function NeoTool() {
       //Fluconazole Prophylaxis
       if (gestAgeTotalDays <= 174 || weight <= 749){
         treatments.push(plainText("<b>Fluconazole Prophylaxis:</b>", true))
-        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meets criteria", 0, "Meets criteria"))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meets criteria", 0, "<b>Fluconazole Prophylaxis:</b> Meets criteria"))
         treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3mg/kg q72h until DC CVL or max 6w", 42, "<b>Fluconazole Prophylaxis:</b> 3mg/kg q72h until DC CVL or max 6w"))
       }
 
