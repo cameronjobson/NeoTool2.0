@@ -250,14 +250,13 @@ function NeoTool() {
         treatments.push(plainText("<b>Caffeine</b>", true))
         //1st & 2nd Protocal
         if(gestAgeTotalDays >= 154 && gestAgeTotalDays <= 174){
-          treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10mg/kg/d on admit", 0, "<b>Caffeine</b> 10mg/kg/d on admit"))
-          treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;increase to 20mg/kg/d dol 8 OR 24h prior to extubation if <8d", 8, "<b>Caffeine</b> increase to 20mg/kg/d dol 8 OR 24h prior to extubation if <8d"))
+          treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10mg/kg/d on admit increase to 20mg/kg/d dol 8 OR 24h prior to extubation if <8d", 8, "<b>Caffeine</b> 10mg/kg/d on admit increase to 20mg/kg/d dol 8 OR 24h prior to extubation if <8d"))
           treatments.push(twoDayInputTraditionalTreatmentDate("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stop @ 34-37w if off PPV & 5d apnea free (off PPV: off CPAP & on <4lpm HFNC)", 238, 259, "<b>Caffeine</b> Stop @ 34-37w if off PPV & 5d apnea free (off PPV: off CPAP & on <4lpm HFNC)"))
         }
 
         //3rd Protocal
         if((gestAgeTotalDays >= 175 && gestAgeTotalDays <= 216) || (gestAgeTotalDays >= 217 && weight <= 1499)){
-          treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20mg/kg/d on admit", 0, "<b>Caffeine</b> 20mg/kg/d on admit"))
+        treatments.push(plainText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20mg/kg/d on admit", false, "<b>Caffeine</b> 20mg/kg/d on admit"))
         }
 
         //4th Protocal
@@ -283,10 +282,7 @@ function NeoTool() {
 
       //Synagis
       if (gestAgeTotalDays <= 202){
-        treatments.push(plainText("<b>RSV Prophylaxis</b> during RSV season", false))
-      }
-      if (gestAgeTotalDays > 202 && gestAgeTotalDays <= 223){
-        treatments.push(simpleTreatment("<b>RSV Prophylaxis</b> if O2 at least first 28d after birth during RSV season", 0))
+        treatments.push(plainText("<b>RSV Prophylaxis</b> before discharge if in RSV season", false))
       }
 
       if (gestAgeTotalDays >= 203 && gestAgeTotalDays <= 223){
