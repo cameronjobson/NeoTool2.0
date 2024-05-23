@@ -15,26 +15,28 @@ function NeoTool() {
     (gestAgeWeeks ? parseInt(gestAgeWeeks, 10) * 7 : 0) +
     (gestAgeDays ? parseInt(gestAgeDays, 10) : 0);
 
-  // Generate past dates in red, current dates in green
-  const getDateClass = (date) => {
-    if (!date || isNaN(Date.parse(date))) {
-      return 'invalid-date';
-    }
+// Generate past dates in red, current dates in green
+const getDateClass = (date) => {
+  if (!date || isNaN(Date.parse(date))) {
+    return 'invalid-date';
+  }
 
-    const currentDate = new Date();
-    currentDate.setUTCHours(0, 0, 0, 0); // Set time to midnight UTC
-  
-    const comparisonDate = new Date(date);
-    comparisonDate.setUTCHours(0, 0, 0, 0); // Set time to midnight UTC
-  
-    if (currentDate.toUTCString() === comparisonDate.toUTCString()) {
-      return 'current-date';
-    } else if (comparisonDate < currentDate) {
-      return 'past-date';
-    } else {
-      return 'future-date';
-    }
-  };
+  // Convert both dates to the same locale-specific date string format
+  const currentDateStr = new Date().toLocaleDateString('en-US', );
+  const comparisonDateStr = date.toLocaleDateString('en-US', { timeZone: 'UTC' });
+
+  console.log("Current Date:", currentDateStr, "Comparison Date:", comparisonDateStr);
+
+  if (currentDateStr === comparisonDateStr) {
+    return 'current-date';
+  } else if (new Date(comparisonDateStr) < new Date(currentDateStr)) {
+    return 'past-date';
+  } else {
+    return 'future-date';
+  }
+};
+
+
 
   const formatDate = (date) => {
     // Format the date as a local date string without timezone conversion
