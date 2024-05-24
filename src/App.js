@@ -355,7 +355,7 @@ const getDateClass = (date) => {
       }
       //cCMV screening
       treatments.push(simpleTreatment("<b>cCMV screening</b> @ 2w of age unless hearing screen pass both ears simultaneously", 14,))
-      treatments.push(plainText("<b>Audiology Referral</b> if NICU stay >5 days by 9months of age"))
+      treatments.push(plainText('<b>Audiology Referral</b> if NICU stay >5 days by 9m of age, pedi to arrange (erase "pedi to arrange" if discharging from COOK).'))
     }
 
     return isSorted ? sortAndFilterTreatments(treatments) : treatments;
