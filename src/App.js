@@ -147,7 +147,7 @@ const getDateClass = (date) => {
       weekNumber = 40;
     }
     if (R === false){
-      return traditionalTreatmentDate("<b>ROP</b> First Exam due near", weekNumber);
+      return traditionalTreatmentDate("<b>ROP First Exam</b> due near this day", weekNumber);
     }
     else {
       return traditionalTreatmentDate("<b>ROP exam if unstable</b> First Exam due near", weekNumber);
@@ -252,13 +252,15 @@ const getDateClass = (date) => {
         treatments.push(plainText("<b>Caffeine</b>", true))
         //1st & 2nd Protocal
         if(gestAgeTotalDays >= 154 && gestAgeTotalDays <= 174){
-          treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10mg/kg/d on admit increase to 20mg/kg/d dol 8 OR 24h prior to extubation if <8d", 8, "<b>Caffeine</b> 10mg/kg/d on admit increase to 20mg/kg/d dol 8 OR 24h prior to extubation if <8d"))
+          treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10mg/kg/d on admit", 0, "<b>Caffine</b> 10mg/kg/d on admit"))
+          treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;increase to 20mg/kg/d dol 8 OR 24h prior to extubation if <8d", 8, "<b>Caffeine</b> increase to 20mg/kg/d dol 8 OR 24h prior to extubation if <8d"))
           treatments.push(twoDayInputTraditionalTreatmentDate("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stop @ 34-37w if off PPV & 5d apnea free (off PPV: off CPAP & on <4lpm HFNC)", 238, 259, "<b>Caffeine</b> Stop @ 34-37w if off PPV & 5d apnea free (off PPV: off CPAP & on <4lpm HFNC)"))
         }
 
         //3rd Protocal
         if((gestAgeTotalDays >= 175 && gestAgeTotalDays <= 216) || (gestAgeTotalDays >= 217 && weight <= 1499)){
-        treatments.push(plainText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20mg/kg/d on admit", false, "<b>Caffeine</b> 20mg/kg/d on admit"))
+
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20mg/kg/d on admit", 0, "<b>Caffeine</b> 20mg/kg/d on admit"))
         }
 
         //4th Protocal
@@ -283,12 +285,14 @@ const getDateClass = (date) => {
       }
 
       //Synagis
+
       if (gestAgeTotalDays <= 202){
-        treatments.push(plainText("<b>RSV Prophylaxis</b> before discharge if in RSV season", false))
+        treatments.push(plainText("<b>RSV Prophylaxis</b> during RSV season", false))
       }
 
       if (gestAgeTotalDays >= 203 && gestAgeTotalDays <= 223){
-        treatments.push(simpleTreatment("<b>Synagis</b> (if Beyfortus not available) if O2 at least first 28d after birth ", 28))
+        treatments.push(simpleTreatment("<b>RSV Prophylaxis</b> if O2 up to this day (at least first 28d after birth) during RSV season", 28))
+        treatments.push(plainText("<b>RSV Prophylaxis</b> if O2 at least first 28d after birth during RSV season", false))
       }
 
       //ECHO
@@ -296,18 +300,18 @@ const getDateClass = (date) => {
         treatments.push(plainText("<b>ECHO</b> for PAH", true))
       }
       if (gestAgeTotalDays <= 195){
-        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@32w if remains on ventilator around', 32, '<b>ECHO</b> for PAH around @32w if remains on ventilator'))
+        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@32w if remains on ventilator on a convenient weekday', 32, '<b>ECHO</b> @32w if remains on ventilator on a convenient weekday'))
       }
       if (gestAgeTotalDays <= 224){
-        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@36w if remains on resp support around', 36, '<b>ECHO</b> around @36w if remains on resp support'))
+        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@36w if remains on resp support on a covenient weekday', 36, '<b>ECHO</b> @36w if remains on resp support on a covenient weekday'))
       }
 
       //Head Ultrasound
       if (gestAgeTotalDays <= 216){
         treatments.push(plainText("<b>HUS</b>", true))
-        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1wk HUS (7d) due near", 7, "<b>HUS</b> 1wk HUS (7d) (on a convenient weekday)"))
-        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1mo HUS (30d) due near", 30, "<b>HUS</b> 1mo HUS (30d) (on a convenient weekday)"))
-        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Term/DC HUS due near', 40, '<b>HUS</b> Term/DC HUS (on a convenient weekday)'))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1wk (7d) on a convenient weekday", 7, "<b>HUS</b> 1wk HUS (7d) (on a convenient weekday)"))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1mo (30d) on a convenient weekday", 30, "<b>HUS</b> 1mo HUS (30d) (on a convenient weekday)"))
+        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Term/DC (40w CGA) on a convenient weekday', 40, '<b>HUS</b> Term/DC (40w CGA) on a convenient weekday'))
       }
 
       //ROP exam
@@ -315,7 +319,7 @@ const getDateClass = (date) => {
         treatments.push(calculateRopExamDate(false))
       }
       if ((gestAgeTotalDays >= 217) && (weight >= 1501 && weight <= 2000)){
-        treatments.push(simpleTreatment("<b>ROP First Exam</b> (if risk factors) due near this week", 28))
+        treatments.push(simpleTreatment("<b>ROP First Exam</b> (if risk factors) due near this day", 28))
       }
 
       //Nest
@@ -342,15 +346,16 @@ const getDateClass = (date) => {
 
       //Vit K
       if (gestAgeTotalDays >= 154 && gestAgeTotalDays <= 174){
-        treatments.push(simpleTreatment("<b>Vit K</b> 0.3mg IV q72h x 4 doses 0.5mg IM @ 14 dol", 14))
+        treatments.push(simpleTreatment("<b>Vit K</b> 0.3mg IV q72h x 4 doses", 0))
+        treatments.push(simpleTreatment("<b>Vit K</b> Vit K 0.5mg IM @ 14 dol", 14))
       }
 
       //TSH and Free T4:
       if (gestAgeTotalDays <= 216 || weight <= 1500){
-        treatments.push(plainText("<b>TSH and Free T4 near this date with Tuesday nutrition labs:</b>", true))
-        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30 days due near", 30, "<b>TSH and Free T4 near this date with Tuesday nutrition labs:</b> 30 days (on a convenient weekday)"))
+        treatments.push(plainText("<b>TSH and Free T4 (on a convenient weekday)</b>", true))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30 days", 30, "<b>TSH and Free T4 (on a convenient weekday) 30 days</b>"))
         if (gestAgeTotalDays <= 174){
-          treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;60 days due near", 60, "<b>TSH and Free T4 near this date with Tuesday nutrition labs:</b> 60 days (on a convenient weekday)"))
+          treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;60 days", 60, "<b>TSH and Free T4 (on a convenient weekday) 60 days</b>"))
         }
       }
       //cCMV screening
