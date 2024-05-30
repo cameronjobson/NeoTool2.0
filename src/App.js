@@ -189,12 +189,6 @@ const getDateClass = (date) => {
     if (weight > 0 && gestAgeTotalDays > 0) {
 
       //Donor Breast Milk
-      if (weight <= 1250){
-        treatments.push(simpleTreatment("Qualifies for <b>DEBM and Prolacta</b>", 0))
-      }
-      if (weight >= 1251 && weight <= 2200){
-        treatments.push(simpleTreatment("Qualifies for <b>DEBM and HMF</b>", 0))
-      }
       if (weight < 1500 && gestAgeTotalDays < 245){
         treatments.push(traditionalTreatmentDate('<b>DBM</b> stop at 1500g and 35w', 35))
       }
@@ -204,8 +198,15 @@ const getDateClass = (date) => {
       if (weight >= 1500 && gestAgeTotalDays < 245){
         treatments.push(traditionalTreatmentDate('<b>DBM</b> stop at 35w', 35))
       }
+      if (((weight >= 1501 && weight <= 2200) && (gestAgeTotalDays < 245)) || weight <= 1500){
+        treatments.push(simpleTreatment('<b>DBM</b> meets criteria for', 0))
+      }
 
       //Prolacta
+      if (weight <= 1250){
+        treatments.push(simpleTreatment('<b>Prolacta</b> meets criteria for', 0))
+      }
+
       if (weight <= 1250 && gestAgeTotalDays < 230){
         treatments.push(traditionalTreatmentDate('<b>Prolacta</b> stop at 1500g and 33w', 33))
       }
@@ -215,9 +216,18 @@ const getDateClass = (date) => {
       }
 
       //HMF/PTF
-      if (weight >= 1251 && weight <= 2200){
-        treatments.push(traditionalTreatmentDate('<b>HMF/PTF</b> until 3.5kg then D/C feeds ', 35))
+      if ((weight >= 1251 && weight <= 2200) && gestAgeTotalDays < 259){
+        treatments.push(simpleTreatment('<b>HMF</b> meets criteria for', 0))
       }
+
+      if ((weight >= 1251 && weight <= 2200) && gestAgeTotalDays < 259){
+        treatments.push(traditionalTreatmentDate('<b>HMF/PTF</b> until 3kg and 37w then D/C feeds, 3.5k if mod/severe malnut', 37))
+      }
+
+      if ((weight >= 1251 && weight <= 2200) && gestAgeTotalDays >= 259){
+        treatments.push(simpleTreatment('<b>HMF</b> meets criteria for, <b>HMF/PTF</b> until 3kg and then D/C feeds, 3.5k if mod/severe malnut', 0))
+      }
+
       //Multivitamin
       treatments.push(simpleTreatment('<b>Vit(s)/Fe</b> at full feeds and >/=14dol', 14));
 
@@ -231,7 +241,7 @@ const getDateClass = (date) => {
 
       //Trial of cpap
       if (gestAgeTotalDays <= 223){
-        treatments.push(twoDayInputTraditionalTreatmentDate("<b>CPAP preferred mode of resp support up to</b> 32w-34w", 224, 238))
+        treatments.push(twoDayInputTraditionalTreatmentDate("<b>CPAP preferred mode</b> of resp support up to 32w-34w", 224, 238))
       }
 
       //Oxygen Challenge Test
@@ -252,7 +262,7 @@ const getDateClass = (date) => {
         treatments.push(plainText("<b>Caffeine</b>", true))
         //1st & 2nd Protocal
         if(gestAgeTotalDays >= 154 && gestAgeTotalDays <= 174){
-          treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10mg/kg/d on admit", 0, "<b>Caffine</b> 10mg/kg/d on admit"))
+          treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10mg/kg/d on admit", 0, "<b>Caffeine</b> 10mg/kg/d on admit"))
           treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;increase to 20mg/kg/d dol 8 OR 24h prior to extubation if <8d", 8, "<b>Caffeine</b> increase to 20mg/kg/d dol 8 OR 24h prior to extubation if <8d"))
           treatments.push(twoDayInputTraditionalTreatmentDate("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stop @ 34-37w if off PPV & 5d apnea free (off PPV: off CPAP & on <4lpm HFNC)", 238, 259, "<b>Caffeine</b> Stop @ 34-37w if off PPV & 5d apnea free (off PPV: off CPAP & on <4lpm HFNC)"))
         }
@@ -309,8 +319,8 @@ const getDateClass = (date) => {
       //Head Ultrasound
       if (gestAgeTotalDays <= 216){
         treatments.push(plainText("<b>HUS</b>", true))
-        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1wk (7d) on a convenient weekday", 7, "<b>HUS</b> 1wk HUS (7d) (on a convenient weekday)"))
-        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1mo (30d) on a convenient weekday", 30, "<b>HUS</b> 1mo HUS (30d) (on a convenient weekday)"))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1wk (7d) on a convenient weekday", 7, "<b>HUS</b> 1wk HUS (7d) on a convenient weekday"))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1mo (30d) on a convenient weekday", 30, "<b>HUS</b> 1mo HUS (30d) on a convenient weekday"))
         treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Term/DC (40w CGA) on a convenient weekday', 40, '<b>HUS</b> Term/DC (40w CGA) on a convenient weekday'))
       }
 
@@ -352,7 +362,7 @@ const getDateClass = (date) => {
 
       //TSH and Free T4:
       if (gestAgeTotalDays <= 216 || weight <= 1500){
-        treatments.push(plainText("<b>TSH and Free T4 (on a convenient weekday)</b>", true))
+        treatments.push(plainText("<b>TSH and Free T4</b> (on a convenient weekday)", true))
         treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30 days", 30, "<b>TSH and Free T4 (on a convenient weekday) 30 days</b>"))
         if (gestAgeTotalDays <= 174){
           treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;60 days", 60, "<b>TSH and Free T4 (on a convenient weekday) 60 days</b>"))
