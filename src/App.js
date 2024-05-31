@@ -363,9 +363,9 @@ const getDateClass = (date) => {
       //TSH and Free T4:
       if (gestAgeTotalDays <= 216 || weight <= 1500){
         treatments.push(plainText("<b>TSH and Free T4</b> (on a convenient weekday)", true))
-        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30 days", 30, "<b>TSH and Free T4 (on a convenient weekday) 30 days</b>"))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30 days", 30, "<b>TSH and Free T4</b> (on a convenient weekday) 30 days"))
         if (gestAgeTotalDays <= 174){
-          treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;60 days", 60, "<b>TSH and Free T4 (on a convenient weekday) 60 days</b>"))
+          treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;60 days", 60, "<b>TSH and Free T4</b> (on a convenient weekday) 60 days"))
         }
       }
       //cCMV screening
