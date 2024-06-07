@@ -343,9 +343,9 @@ const getDateClass = (date) => {
       //Hepatitis b vaccine
       if (weight <= 1999){
         treatments.push(simpleTreatment("<b>Hep B Vaccine</b> at 30dol", 30,))
-      } else {
-        treatments.push(simpleTreatment("<b>Hep B Vaccine</b> at 30dol, defer to 60dol if infant too small for vaccination", 30,))
       }
+      treatments.push(simpleTreatment("<b>2 month Vaccines</b>", 60,))
+      
 
       //Fluconazole Prophylaxis
       if (gestAgeTotalDays <= 174 || weight <= 749){
