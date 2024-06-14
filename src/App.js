@@ -190,13 +190,13 @@ const getDateClass = (date) => {
 
       //Donor Breast Milk
       if (weight < 1500 && gestAgeTotalDays < 245){
-        treatments.push(traditionalTreatmentDate('<b>DBM</b> stop at 1500g and 35w', 35))
+        treatments.push(traditionalTreatmentDate('<b>DBM</b> stop at 1500g and 35wk CGA', 35))
       }
       if (weight < 1500 && gestAgeTotalDays >= 245){
         treatments.push(plainText('<b>DBM</b> stop at 1500g', false))
       }
       if (weight >= 1500 && gestAgeTotalDays < 245){
-        treatments.push(traditionalTreatmentDate('<b>DBM</b> stop at 35w', 35))
+        treatments.push(traditionalTreatmentDate('<b>DBM</b> stop at 35wk CGA', 35))
       }
       if (((weight >= 1501 && weight <= 2200) && (gestAgeTotalDays < 245)) || weight <= 1500){
         treatments.push(simpleTreatment('<b>DBM</b> meets criteria for', 0))
@@ -208,7 +208,7 @@ const getDateClass = (date) => {
       }
 
       if (weight <= 1250 && gestAgeTotalDays < 230){
-        treatments.push(traditionalTreatmentDate('<b>Prolacta</b> stop at 1500g and 33w', 33))
+        treatments.push(traditionalTreatmentDate('<b>Prolacta</b> stop at 1500g and 33wk CGA', 33))
       }
 
       if (weight <= 1250 && gestAgeTotalDays >= 231){
@@ -229,7 +229,7 @@ const getDateClass = (date) => {
       }
 
       //Multivitamin
-      treatments.push(simpleTreatment('<b>Vit(s)/Fe</b> at full feeds and >/=14dol', 14));
+      treatments.push(simpleTreatment('<b>Vit(s)/Fe</b> at full feeds and >/=14 DOL', 14));
 
       //NIPPV
       if (gestAgeTotalDays <= 174){
@@ -241,7 +241,7 @@ const getDateClass = (date) => {
 
       //Trial of cpap
       if (gestAgeTotalDays <= 223){
-        treatments.push(twoDayInputTraditionalTreatmentDate("<b>CPAP preferred mode</b> of resp support up to 32w-34w", 224, 238))
+        treatments.push(twoDayInputTraditionalTreatmentDate("<b>CPAP preferred mode</b> of resp support up to 32-34 wk CGA", 224, 238))
       }
 
       //Oxygen Challenge Test
@@ -253,49 +253,54 @@ const getDateClass = (date) => {
       //Postnatal Steroids
       if (gestAgeTotalDays <= 209){
         treatments.push(plainText("<b>PNS</b>  mod/sev BPD risk>60% at 14, 28d if on vent", true))
-        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;14 dol:", 14, "<b>PNS</b> mod/sev BPD risk>60% at 14 dol if on vent"))
-        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;28 dol:", 28, "<b>PNS</b> mod/sev BPD risk>60% at 28 dol if on vent"))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;14 DOL:", 14, "<b>PNS</b> mod/sev BPD risk>60% at 14 DOL if on vent"))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;28 DOL:", 28, "<b>PNS</b> mod/sev BPD risk>60% at 28 DOL if on vent"))
       }
 
       //Caffeine
       if(gestAgeTotalDays <= 216 || weight < 1500){
         treatments.push(plainText("<b>Caffeine</b>", true))
+
+        //4th Protocal
+        if((gestAgeTotalDays >= 175 && gestAgeTotalDays <= 216) || ((gestAgeTotalDays >= 217 && gestAgeTotalDays <= 237) && weight >= 1499)){
+          treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stop at 34w if off PPV and 5d apnea free off PPV: off CPAP and on <4lpm HFNC)', 34, '<b>Caffeine</b> Stop at 34w if off PPV and 5d apnea free off PPV: off CPAP and on <4lpm HFNC)'))
+          }
+
+        //6th Protocal MOVING TO BEFORE 2 DATE FOR FORMATING PURPOSES
+        if ((gestAgeTotalDays <= 231 && weight < 1500) || (gestAgeTotalDays <= 216 && weight >= 1500)){
+          treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stop weight adjustments at 34wk CGA', 34, '<b>Caffeine</b> Stop weight adjustments at 34wk CGA'))
+          }
+
+
+
         //1st & 2nd Protocal
         if(gestAgeTotalDays >= 154 && gestAgeTotalDays <= 174){
-          treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10mg/kg/d on admit", 0, "<b>Caffeine</b> 10mg/kg/d on admit"))
-          treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;increase to 20mg/kg/d dol 8 OR 24h prior to extubation if <8d", 8, "<b>Caffeine</b> increase to 20mg/kg/d dol 8 OR 24h prior to extubation if <8d"))
-          treatments.push(twoDayInputTraditionalTreatmentDate("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stop @ 34-37w if off PPV & 5d apnea free (off PPV: off CPAP & on <4lpm HFNC)", 238, 259, "<b>Caffeine</b> Stop @ 34-37w if off PPV & 5d apnea free (off PPV: off CPAP & on <4lpm HFNC)"))
+          treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10mg/kg/day on admit", 0, "<b>Caffeine</b> 10mg/kg/day on admit"))
+          treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;increase to 20mg/kg/day on DOL 8 OR 24h prior to extubation if < DOL 8", 8, "<b>Caffeine</b> increase to 20mg/kg/day on DOL 8 OR 24h prior to extubation if < DOL 8"))
+          treatments.push(twoDayInputTraditionalTreatmentDate("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stop @ 34-47 wk CGA if on <4 LPM HFNC & >=5 days apnea free", 238, 259, "<b>Caffeine</b> stop @ 34-47 wk CGA if on <4 LPM HFNC & >=5 days apnea free"))
         }
 
         //3rd Protocal
         if((gestAgeTotalDays >= 175 && gestAgeTotalDays <= 216) || (gestAgeTotalDays >= 217 && weight <= 1499)){
-
-        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20mg/kg/d on admit", 0, "<b>Caffeine</b> 20mg/kg/d on admit"))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20mg/kg/day on admit", 0, "<b>Caffeine</b> 20mg/kg/day on admit"))
         }
 
-        //4th Protocal
-        if((gestAgeTotalDays >= 175 && gestAgeTotalDays <= 216) || ((gestAgeTotalDays >= 217 && gestAgeTotalDays <= 237) && weight >= 1499)){
-        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stop at 34w if off PPV and 5d apnea free off PPV: off CPAP and on <4lpm HFNC)', 34, '<b>Caffeine</b> Stop at 34w if off PPV and 5d apnea free off PPV: off CPAP and on <4lpm HFNC)'))
-        }
+
 
         //5th Protocal
         if (gestAgeTotalDays >= 238 && weight <= 1499){
         treatments.push(plainText("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stop if off PPV and 5d apnea free (off PPV: off CPAP and on <4lpm HFNC)", false, "<b>Caffeine</b> Stop if off PPV and 5d apnea free (off PPV: off CPAP and on <4lpm HFNC)"))
         }
 
-        //6th Protocal
-        if ((gestAgeTotalDays <= 231 && weight < 1500) || (gestAgeTotalDays <= 216 && weight >= 1500)){
-        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stop weight adjustments at 34w', 34, '<b>Caffeine</b> Stop weight adjustments at 34w'))
-        }
+        
 
         //7th Protocal
         if (gestAgeTotalDays <= 216 || weight < 1500){
-        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ok to stop at 43w if remains on PPV', 43, '<b>Caffeine</b> Ok to stop at 43w if remains on PPV'))
+        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ok to stop at 43wk CGA even if remains on PPV', 43, '<b>Caffeine</b> Ok to stop at 43wk CGA even if remains on PPV'))
         }
       }
 
       //Synagis
-
       if (gestAgeTotalDays <= 202){
         treatments.push(plainText("<b>RSV Prophylaxis</b> during RSV season", false))
       }
@@ -310,18 +315,18 @@ const getDateClass = (date) => {
         treatments.push(plainText("<b>ECHO</b> for PAH", true))
       }
       if (gestAgeTotalDays <= 195){
-        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@32w if remains on ventilator on a convenient weekday', 32, '<b>ECHO</b> @32w if remains on ventilator on a convenient weekday'))
+        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; at 32wk CGA if remains on ventilator on a convenient weekday', 32, '<b>ECHO</b> at 32wk CGA if remains on ventilator on a convenient weekday'))
       }
       if (gestAgeTotalDays <= 224){
-        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@36w if remains on resp support on a covenient weekday', 36, '<b>ECHO</b> @36w if remains on resp support on a covenient weekday'))
+        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;at 36wk CGA if remains on resp support on a convenient weekday', 36, '<b>ECHO</b> at 36wk CGA if remains on resp support on a covenient weekday'))
       }
 
       //Head Ultrasound
       if (gestAgeTotalDays <= 216){
         treatments.push(plainText("<b>HUS</b>", true))
-        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1wk (7d) on a convenient weekday", 7, "<b>HUS</b> 1wk HUS (7d) on a convenient weekday"))
-        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1mo (30d) on a convenient weekday", 30, "<b>HUS</b> 1mo HUS (30d) on a convenient weekday"))
-        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Term/DC (40w CGA) on a convenient weekday', 40, '<b>HUS</b> Term/DC (40w CGA) on a convenient weekday'))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;around 1 week of age on a convenient weekday", 7, "<b>HUS</b> around 1 week of age on a convenient weekday"))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;around 1 month of age on a convenient weekday", 30, "<b>HUS</b> around 1 month of age on a convenient weekday"))
+        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Term/DC (40wk CGA) on a convenient weekday', 40, '<b>HUS</b> Term/DC (40wk CGA) on a convenient weekday'))
       }
 
       //ROP exam
@@ -330,6 +335,10 @@ const getDateClass = (date) => {
       }
       if ((gestAgeTotalDays >= 217) && (weight >= 1501 && weight <= 2000)){
         treatments.push(simpleTreatment("<b>ROP First Exam</b> (if risk factors) due near this day", 28))
+      }
+
+      if ((birthWeight > 1500 && birthWeight <= 2000)){
+        treatments.push(simpleTreatment("<b>Consider ROP exam</b> if infant needed: 1) >21% FiO2 for >72hr; 2) Needed inotropic support for hypotension, culture proven sepsis, NEC, Meningitis; 3) At the discretion of the Neonatologist", 4 * 7))
       }
 
       //Nest
@@ -342,7 +351,7 @@ const getDateClass = (date) => {
 
       //Hepatitis b vaccine
       if (weight <= 1999){
-        treatments.push(simpleTreatment("<b>Hep B Vaccine</b> at 30dol", 30,))
+        treatments.push(simpleTreatment("<b>Hep B Vaccine</b> at 30dol (if not given by 35 DOL, generally don't give and wait for 2-month vaccines)", 30,))
       }
       treatments.push(simpleTreatment("<b>2 month Vaccines</b>", 60,))
       
@@ -351,26 +360,32 @@ const getDateClass = (date) => {
       if (gestAgeTotalDays <= 174 || weight <= 749){
         treatments.push(plainText("<b>Fluconazole Prophylaxis:</b>", true))
         treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meets criteria", 0, "<b>Fluconazole Prophylaxis:</b> Meets criteria"))
-        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3mg/kg q72h until DC CVL or max 6w", 42, "<b>Fluconazole Prophylaxis:</b> 3mg/kg q72h until DC CVL or max 6w"))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3mg/kg q72h until DC CVL or max 6wk", 42, "<b>Fluconazole Prophylaxis:</b> 3mg/kg q72h until DC CVL or max 6wk"))
       }
 
       //Vit K
       if (gestAgeTotalDays >= 154 && gestAgeTotalDays <= 174){
         treatments.push(simpleTreatment("<b>Vit K</b> 0.3mg IV q72h x 4 doses", 0))
-        treatments.push(simpleTreatment("<b>Vit K</b> Vit K 0.5mg IM @ 14 dol", 14))
+        treatments.push(simpleTreatment("<b>Vit K</b> Vit K 0.5mg IM at 14 DOL", 14))
       }
 
       //TSH and Free T4:
       if (gestAgeTotalDays <= 216 || weight <= 1500){
         treatments.push(plainText("<b>TSH and Free T4</b> (on a convenient weekday)", true))
-        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;30 days", 30, "<b>TSH and Free T4</b> (on a convenient weekday) 30 days"))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 month", 30, "<b>TSH and Free T4</b> around 1 month of age on a convenient weekday"))
         if (gestAgeTotalDays <= 174){
-          treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;60 days", 60, "<b>TSH and Free T4</b> (on a convenient weekday) 60 days"))
+          treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2 months", 60, "<b>TSH and Free T4</b> around 2 months on a convenient weekday"))
         }
       }
       //cCMV screening
-      treatments.push(simpleTreatment("<b>cCMV screening</b> @ 2w of age unless hearing screen pass both ears simultaneously", 14,))
-      treatments.push(plainText('<b>Audiology Referral</b> if NICU stay >5 days by 9m of age, pedi to arrange (erase "pedi to arrange" if discharging from COOK).'))
+      treatments.push(simpleTreatment("<b>cCMV screening</b> at 2wk of age unless hearing screen pass both ears simultaneously", 14,))
+      treatments.push(plainText('<b>Audiology Referral</b> at 9 months of age if NICU stay > 5 days. Pedi to arrange (erase "Pedi to arrange" if discharging from CCMC)'))
+
+      //Car Seat Testing
+
+      if (gestAgeTotalDays > 37 * 7 || birthWeight < 2500){
+        treatments.push(plainText('<b>Car Seat Test</b> before discharge due to GA < 37 weeks and/or BW < 2500g'))
+      }
     }
 
     return isSorted ? sortAndFilterTreatments(treatments) : treatments;
