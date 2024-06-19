@@ -383,7 +383,7 @@ const getDateClass = (date) => {
 
       //Car Seat Testing
 
-      if (gestAgeTotalDays > 37 * 7 || birthWeight < 2500){
+      if (gestAgeTotalDays < 37 * 7 || birthWeight < 2500){
         treatments.push(plainText('<b>Car Seat Test</b> before discharge due to GA < 37 weeks and/or BW < 2500g'))
       }
     }
