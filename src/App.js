@@ -333,7 +333,7 @@ const getDateClass = (date) => {
       if (weight <= 1500 || gestAgeTotalDays <= 216){
         treatments.push(calculateRopExamDate(false))
       }
-      if ((gestAgeTotalDays >= 217) && (weight >= 1501 && weight <= 2000)){
+      if (((gestAgeTotalDays >= 217) && (weight >= 1501 && weight <= 2000)) || (gestAgeDays >= 31 * 7 && gestAgeDays <= 32 * 7 + 6 && weight >= 1501)){
         treatments.push(simpleTreatment("<b>ROP First Exam</b> (if risk factors) due near this day", 28))
       }
 
