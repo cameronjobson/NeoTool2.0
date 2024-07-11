@@ -318,7 +318,7 @@ const getDateClass = (date) => {
         treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; at 32wk CGA if remains on ventilator on a convenient weekday', 32, '<b>ECHO</b> at 32wk CGA if remains on ventilator on a convenient weekday'))
       }
       if (gestAgeTotalDays <= 224){
-        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;at 36wk CGA if remains on resp support on a convenient weekday', 36, '<b>ECHO</b> at 36wk CGA if remains on resp support on a covenient weekday'))
+        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;at 36wk CGA if remains on resp support on a convenient weekday', 36, '<b>ECHO</b> at 36wk CGA if remains on resp support on a convenient weekday'))
       }
 
       //Head Ultrasound
