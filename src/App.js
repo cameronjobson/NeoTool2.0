@@ -229,7 +229,7 @@ const getDateClass = (date) => {
       }
 
       //Multivitamin
-      treatments.push(simpleTreatment('<b>Vit(s)/Fe</b> at full feeds and >/=14 DOL', 14));
+      treatments.push(simpleTreatment('<b>Vit(s)/Fe</b> Begin vitamins to start at dol 5 once tolerating full feeds', 5));
 
       //NIPPV
       if (gestAgeTotalDays <= 174){
@@ -333,7 +333,7 @@ const getDateClass = (date) => {
       if (weight <= 1500 || gestAgeTotalDays <= 216){
         treatments.push(calculateRopExamDate(false))
       }
-      if (((gestAgeTotalDays >= 217) && (weight >= 1501 && weight <= 2000)) || (gestAgeDays >= 31 * 7 && gestAgeDays <= 32 * 7 + 6 && weight >= 1501)){
+      if (((gestAgeTotalDays >= 217) && (weight >= 1501 && weight <= 2000)) || (gestAgeTotalDays >= 31 * 7 && gestAgeTotalDays <= 32 * 7 + 6 && weight >= 1501)){
         treatments.push(simpleTreatment("<b>ROP First Exam</b> (if risk factors) due near this day", 28))
       }
 
