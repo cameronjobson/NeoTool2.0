@@ -229,7 +229,12 @@ const getDateClass = (date) => {
       }
 
       //Multivitamin
-      treatments.push(simpleTreatment('<b>Vit(s)/Fe</b> Begin vitamins to start at dol 5 once tolerating full feeds', 5));
+      if (weight > 2200){
+        treatments.push(simpleTreatment('<b>Vit(s)/Fe</b> when on full feeds near 5dol', 5));
+      }
+      if (weight <= 2200){
+        treatments.push(simpleTreatment('<b>Vit(s)/Fe</b> at full feeds and >/=14dol', 14));
+      }
 
       //NIPPV
       if (gestAgeTotalDays <= 174){
@@ -333,12 +338,13 @@ const getDateClass = (date) => {
       if (weight <= 1500 || gestAgeTotalDays <= 216){
         treatments.push(calculateRopExamDate(false))
       }
+
       if (((gestAgeTotalDays >= 217) && (weight >= 1501 && weight <= 2000)) || (gestAgeTotalDays >= 31 * 7 && gestAgeTotalDays <= 32 * 7 + 6 && weight >= 1501)){
-        treatments.push(simpleTreatment("<b>ROP First Exam</b> (if risk factors) due near this day", 28))
+        treatments.push(simpleTreatment("<b>ROP First Exam</b> if unstable (inotropes, supp O2 >3d, severe infexn) due near this day", 28))
       }
 
       if ((birthWeight > 1500 && birthWeight <= 2000)){
-        treatments.push(simpleTreatment("<b>Consider ROP exam</b> if infant needed: 1) >21% FiO2 for >72hr; 2) Needed inotropic support for hypotension, culture proven sepsis, NEC, Meningitis; 3) At the discretion of the Neonatologist", 4 * 7))
+        treatments.push(simpleTreatment("<b>ROP First Exam</b> if unstable (inotropes, supp O2 >3d, severe infexn) due near this day", 4 * 7))
       }
 
       //Nest
