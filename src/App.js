@@ -190,13 +190,13 @@ const getDateClass = (date) => {
 
       //Donor Breast Milk
       if (weight < 1500 && gestAgeTotalDays < 245){
-        treatments.push(traditionalTreatmentDate('<b>DBM</b> stop at 1500g and 35wk CGA', 35))
+        treatments.push(traditionalTreatmentDate('<b>DBM</b> stop at 1500g and 35wk PMA', 35))
       }
       if (weight < 1500 && gestAgeTotalDays >= 245){
         treatments.push(plainText('<b>DBM</b> stop at 1500g', false))
       }
       if (weight >= 1500 && gestAgeTotalDays < 245){
-        treatments.push(traditionalTreatmentDate('<b>DBM</b> stop at 35wk CGA', 35))
+        treatments.push(traditionalTreatmentDate('<b>DBM</b> stop at 35wk PMA', 35))
       }
       if (((weight >= 1501 && weight <= 2200) && (gestAgeTotalDays < 245)) || weight <= 1500){
         treatments.push(simpleTreatment('<b>DBM</b> meets criteria for', 0))
@@ -208,7 +208,7 @@ const getDateClass = (date) => {
       }
 
       if (weight <= 1250 && gestAgeTotalDays < 230){
-        treatments.push(traditionalTreatmentDate('<b>Prolacta</b> stop at 1500g and 33wk CGA', 33))
+        treatments.push(traditionalTreatmentDate('<b>Prolacta</b> stop at 1500g and 33wk PMA', 33))
       }
 
       if (weight <= 1250 && gestAgeTotalDays >= 231){
@@ -246,7 +246,7 @@ const getDateClass = (date) => {
 
       //Trial of cpap
       if (gestAgeTotalDays <= 223){
-        treatments.push(twoDayInputTraditionalTreatmentDate("<b>CPAP preferred mode</b> of resp support up to 32-34 wk CGA", 224, 238))
+        treatments.push(twoDayInputTraditionalTreatmentDate("<b>CPAP preferred mode</b> of resp support up to 32-34 wk PMA", 224, 238))
       }
 
       //Oxygen Challenge Test
@@ -273,7 +273,7 @@ const getDateClass = (date) => {
 
         //6th Protocal MOVING TO BEFORE 2 DATE FOR FORMATING PURPOSES
         if ((gestAgeTotalDays <= 231 && weight < 1500) || (gestAgeTotalDays <= 216 && weight >= 1500)){
-          treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stop weight adjustments at 34wk CGA', 34, '<b>Caffeine</b> Stop weight adjustments at 34wk CGA'))
+          treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stop weight adjustments at 34wk PMA', 34, '<b>Caffeine</b> Stop weight adjustments at 34wk PMA'))
           }
 
 
@@ -282,7 +282,7 @@ const getDateClass = (date) => {
         if(gestAgeTotalDays >= 154 && gestAgeTotalDays <= 174){
           treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10mg/kg/day on admit", 0, "<b>Caffeine</b> 10mg/kg/day on admit"))
           treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;increase to 20mg/kg/day on DOL 8 OR 24h prior to extubation if < DOL 8", 8, "<b>Caffeine</b> increase to 20mg/kg/day on DOL 8 OR 24h prior to extubation if < DOL 8"))
-          treatments.push(twoDayInputTraditionalTreatmentDate("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stop @ 34-47 wk CGA if on <4 LPM HFNC & >=5 days apnea free", 238, 259, "<b>Caffeine</b> stop @ 34-47 wk CGA if on <4 LPM HFNC & >=5 days apnea free"))
+          treatments.push(twoDayInputTraditionalTreatmentDate("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stop @ 34-47 wk PMA if on <4 LPM HFNC & >=5 days apnea free", 238, 259, "<b>Caffeine</b> stop @ 34-47 wk PMA if on <4 LPM HFNC & >=5 days apnea free"))
         }
 
         //3rd Protocal
@@ -301,7 +301,7 @@ const getDateClass = (date) => {
 
         //7th Protocal
         if (gestAgeTotalDays <= 216 || weight < 1500){
-        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ok to stop at 43wk CGA even if remains on PPV', 43, '<b>Caffeine</b> Ok to stop at 43wk CGA even if remains on PPV'))
+        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ok to stop at 43wk PMA even if remains on PPV', 43, '<b>Caffeine</b> Ok to stop at 43wk PMA even if remains on PPV'))
         }
       }
 
@@ -320,10 +320,10 @@ const getDateClass = (date) => {
         treatments.push(plainText("<b>ECHO</b> for PAH", true))
       }
       if (gestAgeTotalDays <= 195){
-        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; at 32wk CGA if remains on ventilator on a convenient weekday', 32, '<b>ECHO</b> at 32wk CGA if remains on ventilator on a convenient weekday'))
+        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; at 32wk PMA if remains on ventilator on a convenient weekday', 32, '<b>ECHO</b> at 32wk PMA if remains on ventilator on a convenient weekday'))
       }
       if (gestAgeTotalDays <= 224){
-        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;at 36wk CGA if remains on resp support on a convenient weekday', 36, '<b>ECHO</b> at 36wk CGA if remains on resp support on a convenient weekday'))
+        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;at 36wk PMA if remains on resp support on a convenient weekday', 36, '<b>ECHO</b> at 36wk PMA if remains on resp support on a convenient weekday'))
       }
 
       //Head Ultrasound
@@ -331,7 +331,7 @@ const getDateClass = (date) => {
         treatments.push(plainText("<b>HUS</b>", true))
         treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;around 1 week of age on a convenient weekday", 7, "<b>HUS</b> around 1 week of age on a convenient weekday"))
         treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;around 1 month of age on a convenient weekday", 30, "<b>HUS</b> around 1 month of age on a convenient weekday"))
-        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Term/DC (40wk CGA) on a convenient weekday', 40, '<b>HUS</b> Term/DC (40wk CGA) on a convenient weekday'))
+        treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Term/DC (40wk PMA) on a convenient weekday', 40, '<b>HUS</b> Term/DC (40wk PMA) on a convenient weekday'))
       }
 
       //ROP exam
