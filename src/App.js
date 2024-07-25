@@ -268,7 +268,7 @@ const getDateClass = (date) => {
 
         //4th Protocal
         if((gestAgeTotalDays >= 175 && gestAgeTotalDays <= 216) || ((gestAgeTotalDays >= 217 && gestAgeTotalDays <= 237) && weight >= 1499)){
-          treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stop at 34w if off PPV and 5d apnea free off PPV: off CPAP and on <4lpm HFNC)', 34, '<b>Caffeine</b> Stop at 34w if off PPV and 5d apnea free off PPV: off CPAP and on <4lpm HFNC)'))
+          treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stop at 34w if off PPV and 5d apnea free off PPV: off CPAP and on <4lpm HFNC)', 34, '<b>Caffeine</b> Stop at 34wk if off PPV and 5d apnea free off PPV: off CPAP and on <4lpm HFNC)'))
           }
 
         //6th Protocal MOVING TO BEFORE 2 DATE FOR FORMATING PURPOSES
@@ -329,7 +329,7 @@ const getDateClass = (date) => {
       //Head Ultrasound
       if (gestAgeTotalDays <= 216){
         treatments.push(plainText("<b>HUS</b>", true))
-        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;around 1 week of age on a convenient weekday", 7, "<b>HUS</b> around 1 week of age on a convenient weekday"))
+        treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;around 1wk of age on a convenient weekday", 7, "<b>HUS</b> around 1wk of age on a convenient weekday"))
         treatments.push(simpleTreatment("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;around 1 month of age on a convenient weekday", 30, "<b>HUS</b> around 1 month of age on a convenient weekday"))
         treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Term/DC (40wk PMA) on a convenient weekday', 40, '<b>HUS</b> Term/DC (40wk PMA) on a convenient weekday'))
       }
