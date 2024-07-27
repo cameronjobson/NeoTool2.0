@@ -221,7 +221,7 @@ const getDateClass = (date) => {
       }
 
       if ((weight >= 1251 && weight <= 2200) && gestAgeTotalDays < 259){
-        treatments.push(traditionalTreatmentDate('<b>HMF/PTF</b> until 3kg and 37w then D/C feeds, 3.5k if mod/severe malnut', 37))
+        treatments.push(traditionalTreatmentDate('<b>HMF/PTF</b> until 3kg and 37wk then D/C feeds, 3.5k if mod/severe malnut', 37))
       }
 
       if ((weight >= 1251 && weight <= 2200) && gestAgeTotalDays >= 259){
@@ -268,7 +268,7 @@ const getDateClass = (date) => {
 
         //4th Protocal
         if((gestAgeTotalDays >= 175 && gestAgeTotalDays <= 216) || ((gestAgeTotalDays >= 217 && gestAgeTotalDays <= 237) && weight >= 1499)){
-          treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stop at 34w if off PPV and 5d apnea free off PPV: off CPAP and on <4lpm HFNC)', 34, '<b>Caffeine</b> Stop at 34wk if off PPV and 5d apnea free off PPV: off CPAP and on <4lpm HFNC)'))
+          treatments.push(traditionalTreatmentDate('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stop at 34wk if off PPV and 5d apnea free off PPV: off CPAP and on <4lpm HFNC)', 34, '<b>Caffeine</b> Stop at 34wk if off PPV and 5d apnea free off PPV: off CPAP and on <4lpm HFNC)'))
           }
 
         //6th Protocal MOVING TO BEFORE 2 DATE FOR FORMATING PURPOSES
@@ -339,11 +339,7 @@ const getDateClass = (date) => {
         treatments.push(calculateRopExamDate(false))
       }
 
-      if (((gestAgeTotalDays >= 217) && (weight >= 1501 && weight <= 2000)) || (gestAgeTotalDays >= 31 * 7 && gestAgeTotalDays <= 32 * 7 + 6 && weight >= 1501)){
-        treatments.push(simpleTreatment("<b>ROP First Exam</b> if unstable (inotropes, supp O2 >3d, severe infexn) due near this day", 28))
-      }
-
-      if ((birthWeight > 1500 && birthWeight <= 2000)){
+      if ((weight >= 1501 && weight <= 2000 && gestAgeTotalDays >= 31 * 7) || (gestAgeTotalDays >= 31 * 7 && gestAgeTotalDays <= 32 * 7 + 6 && weight > 2000)){
         treatments.push(simpleTreatment("<b>ROP First Exam</b> if unstable (inotropes, supp O2 >3d, severe infexn) due near this day", 4 * 7))
       }
 
