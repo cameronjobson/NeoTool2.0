@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import DOMPurify from 'dompurify';
 import './App.css';
+import CopyButton from './CopyButton';
 
 function NeoTool() {
   const [gestAgeWeeks, setGestAgeWeeks] = useState('');
@@ -9,6 +10,7 @@ function NeoTool() {
   const [birthWeight, setBirthWeight] = useState('');
   const [output, setOutput] = useState([]);
   const [isSorted, setIsSorted] = useState(true);
+  const [showCopyButton, setShowCopyButton] = useState(false);
 
   // Convert specfic inputs from strings to integers
   const gestAgeTotalDays =
@@ -393,6 +395,21 @@ const getDateClass = (date) => {
     return isSorted ? sortAndFilterTreatments(treatments) : treatments;
   };
 
+  //Gets Text for the copy button
+  const getOutputText = () => {
+    const stripHtmlTags = (html) => {
+      const div = document.createElement('div');
+      div.innerHTML = html;
+      return div.textContent || div.innerText || '';
+    };
+  
+    return output.map(item => {
+      const text = isSorted ? item.description2 : item.description;
+      return stripHtmlTags(text);
+    }).join('\n');
+  };
+  
+
 // Helper function to determine if the date is valid FOR SORT METHOD
 const isValidDate = (date) => {
   if (date instanceof Date) {
@@ -442,6 +459,7 @@ const toggleSort = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setOutput(treatmentList());
+    setShowCopyButton(true);
   };
 
   return (
@@ -495,7 +513,7 @@ const toggleSort = () => {
           <label className="label-inline">g</label>
         </div>
         <div className="button-container">
-  <button type="submit" className="generate-button">
+  <button type="submit" className="generate-button" onClick={() => setShowCopyButton(true)}>
     Generate Treatment Dates
   </button>
   <button onClick={toggleSort} className="toggle-sort-button">
@@ -506,6 +524,7 @@ const toggleSort = () => {
       </form>
   
       <div className="output-section">
+        <CopyButton getText={getOutputText} show={showCopyButton}/>
         {output.map((item, index) => {
           const dateClass = getDateClass(item.date || '');
           const sanitizedDescription = DOMPurify.sanitize(isSorted ? item.description2 : item.description || '');
