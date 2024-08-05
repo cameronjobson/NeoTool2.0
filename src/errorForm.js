@@ -10,7 +10,7 @@ const BugReportForm = () => {
     e.preventDefault();
 
     try {
-      await axios.post('https://nicucalcbacklog-634ac3dd5ec3.herokuapp.com/', {
+      await axios.post('https://nicucalcbacklog-634ac3dd5ec3.herokuapp.com/report-bug', {
         name,
         email,
         description,
