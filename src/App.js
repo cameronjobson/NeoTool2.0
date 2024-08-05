@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import DOMPurify from 'dompurify';
 import './App.css';
 import CopyButton from './CopyButton';
+import BugReportForm from './errorForm';
 
 function NeoTool() {
   const [gestAgeWeeks, setGestAgeWeeks] = useState('');
@@ -539,6 +540,10 @@ const toggleSort = () => {
           );
         })}
       </div>
+      DO NOT USE, CURRENTLY IN TESTING
+      <BugReportForm>
+
+      </BugReportForm>
   
       {/* Footer Section */}
       <footer className="NeoTool-footer">
