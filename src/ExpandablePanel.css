@@ -1,0 +1,69 @@
+/* Expandable Panel Container */
+.expandable-panel {
+    margin-bottom: 10px;
+    padding-top: 10px;
+  }
+  
+  .expandable-panel.sub-panel {
+    background-color: #0288d1; /* Light blue background */
+    padding: 5px; /* Smaller size */
+  }
+  
+  .expandable-subpanel-button {
+    width: 100%;
+    text-align: left;
+    padding: 5px;
+    font-size: 16px;
+    background-color: #03a9f4; /* Light blue background */
+    border: none;
+    cursor: pointer;
+    outline: none; /* Removes focus outline */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+  }
+  
+  /* Button for toggling the panel */
+  .expandable-panel-button {
+    width: 100%;
+    text-align: left;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #0057a9; /* Light grey for unselected state */
+    border: none;
+    cursor: pointer;
+    outline: none; /* Removes focus outline */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+  }
+  
+  .expandable-subpanel-button:hover{
+    background-color: #4fc3f7
+  }
+  .expandable-panel-button:hover {
+    background-color: #008ef3; /* Darker grey on hover for better interaction feedback */
+  }
+  
+  /* Icon before the title, rotates when open */
+  .expandable-panel-icon {
+    margin-right: 10px;
+    transition: transform 0.3s; /* Smooth rotation */
+  }
+  
+  /* Rotated icon when the panel is open */
+  .expandable-panel-icon.open {
+    transform: rotate(90deg); /* Rotates the arrow to indicate expansion */
+  }
+  
+  /* Content area of the panel */
+  .expandable-panel-content {
+    overflow: hidden;
+    transition: max-height 0.1s linear, padding 0.1s linear, visibility 0.1s linear;
+    max-height: 0; 
+    padding: 0 10px; 
+    visibility: hidden;
+  }
+  
+  .expandable-panel-content.open {
+    max-height: 2000px; /* Set to a higher approximate value as needed */
+    padding: 10px;
+    visibility: visible;
+    min-width: 300px;
+  }

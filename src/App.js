@@ -3,6 +3,7 @@ import DOMPurify from 'dompurify';
 import './App.css';
 import CopyButton from './CopyButton';
 import BugReportForm from './errorForm';
+import ExpandablePanel from './ExpandablePanel';
 
 function NeoTool() {
   const [gestAgeWeeks, setGestAgeWeeks] = useState('');
@@ -463,12 +464,39 @@ const toggleSort = () => {
     setShowCopyButton(true);
   };
 
+  //PSA STYLES
+  const styles = {
+    psaContainer: {
+      padding: '10px',
+      backgroundColor: '#f9f9f9',
+      border: '1px solid #ccc',
+      borderRadius: '5px',
+      marginBottom: '20px'
+    },
+    psaTitle: {
+      margin: '0 0 10px 0',
+      fontSize: '18px',
+      color: '#333'
+    },
+    psaContent: {
+      margin: '0',
+      fontSize: '16px',
+      color: '#666'
+    }
+  };
+
   return (
     <div className="NeoTool">
       <form onSubmit={handleSubmit}>
         <img src="/pediatrixlogo.jpg" alt="Baylor University Medical Center" />
         <h1>NICU Patient Treatment Generator</h1>
         <h2>(Not Affiliated with Pediatrix)</h2>
+        <div style={styles.psaContainer}>
+          <h2 style={styles.psaTitle}>Error/Feedback Reporting Added</h2>
+          <p style={styles.psaContent}>
+          After submitting patient information, please use the error/feedback form to report any issues or share suggestions. You can also view any unfixed errors on the new NICU backlog. Your feedback helps improve the site. Thank you!
+      </p>
+    </div>
         <div className="input-group">
           <label htmlFor="gestational-age-weeks">Birth Gestational Age:</label>
           <input
@@ -540,10 +568,10 @@ const toggleSort = () => {
           );
         })}
       </div>
-      DO NOT USE, CURRENTLY IN TESTING
-      <BugReportForm>
-
-      </BugReportForm>
+      <ExpandablePanel title={'Report error / Feedback'} show={showCopyButton}>
+        <BugReportForm gestAgeTotalDays={gestAgeTotalDays} birthWeight={birthWeight} dateOfBirth={dateOfBirth}>
+        </BugReportForm>
+      </ExpandablePanel>
   
       {/* Footer Section */}
       <footer className="NeoTool-footer">
